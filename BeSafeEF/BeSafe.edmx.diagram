@@ -4,8 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4e67748865ae439ea4ebfc48eb64b1d8" Name="Diagram1" >
+      <Diagram DiagramId="4e67748865ae439ea4ebfc48eb64b1d8" Name="Diagram1" ZoomLevel="143" >
         <EntityTypeShape EntityType="BeSafe.MasterItems" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeSafe.Categories" Width="1.5" PointX="1.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

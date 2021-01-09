@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(EF6CodeFirstDemo.BeSafeContainer),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsac956b79e67df9fbc1adcf73ed0b06c69b78fd4be8f1902fda993746f31f1a26))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsfb79c714e8402eff8251b3ddd0db868458429490898e49fd7dd414f1bbd5d8f7))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework 6 Power Tools", "0.9.2.0")]
-    internal sealed class ViewsForBaseEntitySetsac956b79e67df9fbc1adcf73ed0b06c69b78fd4be8f1902fda993746f31f1a26 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetsfb79c714e8402eff8251b3ddd0db868458429490898e49fd7dd414f1bbd5d8f7 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "ac956b79e67df9fbc1adcf73ed0b06c69b78fd4be8f1902fda993746f31f1a26"; }
+            get { return "fb79c714e8402eff8251b3ddd0db868458429490898e49fd7dd414f1bbd5d8f7"; }
         }
 
         /// <summary>
@@ -55,6 +55,16 @@ namespace Edm_EntityMappingGeneratedViews
             if (extentName == "BeSafeContainer.MasterItemsSet")
             {
                 return GetView1();
+            }
+
+            if (extentName == "BeSafeStoreContainer.Categories")
+            {
+                return GetView2();
+            }
+
+            if (extentName == "BeSafeContainer.Categories")
+            {
+                return GetView3();
             }
 
             return null;
@@ -95,6 +105,46 @@ namespace Edm_EntityMappingGeneratedViews
             T.description AS MasterItems_description, 
             True AS _from0
         FROM BeSafeStoreContainer.MasterItemsSet AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for BeSafeStoreContainer.Categories.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView2()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Categories
+        [BeSafe.Store.Categories](T1.Categories_CategoryId, T1.Categories_CategoryName, T1.Categories_ParentCategoryId, T1.Categories_Remarks)
+    FROM (
+        SELECT 
+            T.CategoryId AS Categories_CategoryId, 
+            T.CategoryName AS Categories_CategoryName, 
+            T.ParentCategoryId AS Categories_ParentCategoryId, 
+            T.Remarks AS Categories_Remarks, 
+            True AS _from0
+        FROM BeSafeContainer.Categories AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for BeSafeContainer.Categories.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView3()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Categories
+        [BeSafe.Categories](T1.Categories_CategoryId, T1.Categories_CategoryName, T1.Categories_ParentCategoryId, T1.Categories_Remarks)
+    FROM (
+        SELECT 
+            T.CategoryId AS Categories_CategoryId, 
+            T.CategoryName AS Categories_CategoryName, 
+            T.ParentCategoryId AS Categories_ParentCategoryId, 
+            T.Remarks AS Categories_Remarks, 
+            True AS _from0
+        FROM BeSafeStoreContainer.Categories AS T
     ) AS T1");
         }
     }

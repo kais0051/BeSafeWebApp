@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BeSafeWebApp.Manager;
 using EF6CodeFirstDemo;
 using Microsoft.AspNetCore.Http;
 
@@ -24,13 +25,9 @@ namespace BeSafeWebApp.Controllers
         System.Data.SqlClient.SqlConnection con;
         public IActionResult Index()
         {
-
-            using (var context = new BeSafeContainer())
-            {
-                var query = context.MasterItemsSet.FirstOrDefault()?.description;
-                Debug.Write("ok" + query);
-            }
+            ViewBag.Tree = CategoriesManager.GetAllCategoriesForTree();
             return View();
+        
         }
 
         public IActionResult Privacy()

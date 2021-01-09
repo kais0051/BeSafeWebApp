@@ -67,6 +67,9 @@
       <DependentUpon>BeSafe.edmx</DependentUpon>
     </Compile>
     <Compile Include="BeSafe.Views.cs" />
+    <Compile Include="Categories.cs">
+      <DependentUpon>BeSafe.tt</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="MasterItems.cs">
       <DependentUpon>BeSafe.tt</DependentUpon>

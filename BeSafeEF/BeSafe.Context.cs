@@ -26,5 +26,6 @@ namespace EF6CodeFirstDemo
         }
     
         public virtual DbSet<MasterItems> MasterItemsSet { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
     }
 }
