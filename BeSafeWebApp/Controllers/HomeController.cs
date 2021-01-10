@@ -25,8 +25,7 @@ namespace BeSafeWebApp.Controllers
         System.Data.SqlClient.SqlConnection con;
         public IActionResult Index()
         {
-            ViewBag.Tree = CategoriesManager.GetAllCategoriesForTree();
-            return View();
+            return View(new User(){login = "admin" ,password = "admin"});
         
         }
 
@@ -39,6 +38,11 @@ namespace BeSafeWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Login(string login,string password)
+        {
+           return RedirectToAction("Index", "Admin");
         }
     }
 }

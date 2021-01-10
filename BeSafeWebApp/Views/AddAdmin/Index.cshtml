@@ -1,0 +1,176 @@
+﻿
+<style>
+
+    #accordion .panel-heading {
+        padding: 0;
+    }
+
+    #accordion .panel-title > a {
+        display: block;
+        padding: 0.4em 0.6em;
+        outline: none;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        #accordion .panel-title > a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before {
+            content: "\e113";
+            float: left;
+            font-family: 'Glyphicons Halflings';
+            margin-right: 1em;
+        }
+
+        #accordion .panel-title > a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before {
+            content: "\e114";
+        }
+
+    #accordion.panel-group .panel {
+        margin-top: 5px;
+    }
+
+    #accordion .actions_div > a {
+        font-size: 14px;
+        margin-right: 15px;
+    }
+
+        #accordion .actions_div > a.exit-btn {
+            color: #dd4b39;
+        }
+
+    #accordion .remove_field.exit-btn {
+        color: #dd4b39;
+        margin-left: 7px;
+        float: left;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                List des Admins
+                <ul class="pull-right panel-settings panel-button-tab-right">
+                    <li class="dropdown">
+                        <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                            <em class="fa fa-cogs"></em>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <ul class="dropdown-settings">
+                                    <li>
+                                        <a href="#">
+                                            <em class="fa fa-cog"></em> Settings
+                                        </a>
+                                    </li>
+                                
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+            </div>
+            <div class="panel-body">
+                <ul class="todo-list">
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-1">Admin 1</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-2">Admin 2</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-3">Admin 3</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-4">Admin 4</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-5">Admin 5</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                    <li class="todo-list-item">
+                        <div class="checkbox">
+                            <label for="checkbox-6">Admin 6</label>
+                        </div>
+                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Ajouter un Admin
+                <ul class="pull-right panel-settings panel-button-tab-right">
+                    <li class="dropdown">
+                        <a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                            <em class="fa fa-cogs"></em>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <ul class="dropdown-settings">
+                                    <li>
+                                        <a href="#">
+                                            <em class="fa fa-cog"></em> Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="" method="post">
+                    <fieldset>
+                        <!-- Name input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">Nom</label>
+                            <div class="col-md-9">
+                                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Email input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="email">E-mail</label>
+                            <div class="col-md-9">
+                                <input id="emails" name="email" type="text" placeholder="Email" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="email">Mot de passe</label>
+                            <div class="col-md-9">
+                                <input id="password" name="password" type="password" placeholder="Mot de passe" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Form actions -->
+                        <div class="form-group">
+                            <div class="col-md-12 widget-right">
+                                <button type="submit" class="btn btn-default btn-md pull-right">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ 

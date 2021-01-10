@@ -1,121 +1,62 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model BeSafeWebApp.Models.User
+@{
+    Layout = null;
 }
-<style>
-
-    #accordion .panel-heading {
-        padding: 0;
-    }
-
-    #accordion .panel-title>a {
-        display: block;
-        padding: 0.4em 0.6em;
-        outline: none;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    #accordion .panel-title>a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before
-    {
-        content: "\e113";
-        float: left;
-        font-family: 'Glyphicons Halflings';
-        margin-right: 1em;
-    }
-
-    #accordion .panel-title>a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before
-    {
-        content: "\e114";
-    }
-    #accordion.panel-group .panel{
-        margin-top: 5px;
-    }
-    #accordion .actions_div > a {
-        font-size: 14px;
-        margin-right: 15px;
-    }
-    #accordion .actions_div > a.exit-btn {
-        color:#dd4b39;
-    }
-    #accordion .remove_field.exit-btn{
-        color:#dd4b39;
-        margin-left:7px;
-        float: left;
-    }
-</style>
-<div class="panel panel-container">
-    <div class="row">
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-teal panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-shopping-cart color-blue"></em>
-                    <div class="large">120</div>
-                    <div class="text-muted">New Orders</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-blue panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-comments color-orange"></em>
-                    <div class="large">52</div>
-                    <div class="text-muted">Comments</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-orange panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-users color-teal"></em>
-                    <div class="large">24</div>
-                    <div class="text-muted">New Users</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-red panel-widget ">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-search color-red"></em>
-                    <div class="large">25.2k</div>
-                    <div class="text-muted">Page Views</div>
-                </div>
-            </div>
-        </div>
-    </div><!--/.row-->
-</div>
+<script type = "text/javascript" >  
+    function preventBack(){window.history.forward();}  
+    setTimeout("preventBack()", 0); 
+    sessionStorage.clear();
+    window.onunload=function(){null};  
+</script> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lumino - Login</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/datepicker3.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
 <div class="row">
-        <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="panel panel-success">
-                <div class="panel-header with-border">
-                    <h2 class="panel-title text-center">DÉFINIR L'ARBORESCENCE</h2>
-                </div>
-                <!-- /.panel-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                    <div class="panel-body">
-			
-                        <div class="panel-group" id="accordion" role="tablist"
-                             aria-multiselectable="true">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">Log in</div>
+            <div class="panel-body">
+                <form role="form">
+                    <fieldset>
+                    
+                        <div class="form-group">
+                            @Html.HiddenFor(model => model.login)
+                            @Html.EditorFor(model => model.login, new {htmlAttributes = new {@class = "form-control", @placeholder = "E-mail", @name = "email", @type = "email"}})
                         </div>
-					
-                        <div class="col-md-12 text-center" style="margin-top:15px;">
-                            <button class="btn btn-success" id="addButton" value=""><span class="glyphicon glyphicon-plus"></span> Ajouter nouveau dossier</button>
+                        <div class="form-group">
+                            @Html.HiddenFor(model => model.password)
+                            @Html.EditorFor(model => model.password, new {htmlAttributes = new {@class = "form-control", @placeholder = "password", @name = "password", @type = "password"}})
                         </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                            </label>
+                        </div>
+                    @Html.ActionLink("Login", "Login", "Home", new {login = Model.login, password = Model.password}, new {@class = "btn btn-primary"})
 
-				
-                    </div>
-                    <!-- /.panel-body -->
-                    <div class="panel-footer">
-                        <div class="col-sm-offset-3 col-sm-6 text-center">
-					
-                        </div>
-
-                    </div>
-                    <!-- /.box-footer -->
+                    @Html.ActionLink("Utilisateur invité", "Index", "User", null, new {@class = "btn btn-warning", @style = "float: right;"})
+                 
+                    </fieldset>
                 </form>
             </div>
         </div>
-   
-</div><!--/.row-->
- 
+    </div><!-- /.col-->
+</div><!-- /.row -->	
+	
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
