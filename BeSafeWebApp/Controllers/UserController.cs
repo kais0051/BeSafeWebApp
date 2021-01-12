@@ -43,7 +43,7 @@ namespace BeSafeWebApp.Controllers
             if (LogedinUser.ID > 0)
             {
 
-                return RedirectToAction("Index","Admin");
+                return RedirectToAction("Index1","Admin");
             }
             else
             {

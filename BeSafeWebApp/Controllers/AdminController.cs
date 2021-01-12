@@ -36,9 +36,17 @@ namespace BeSafeWebApp.Controllers
         [HttpGet]
         public ActionResult Index1()
         {
-            var users = userBusinessLogic.GetUsers().Result;
-            var category = categoryBusinessLogic.GetAllCategories().Result;
-            return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
+            var user = userBusinessLogic.GetUsers().Result.FirstOrDefault();
+            var categories = categoryBusinessLogic.GetAllCategories().Result;
+
+            BeSafeModels.HomeModel homeModel = new BeSafeModels.HomeModel();
+            homeModel.User = mapUserEntityToModel.ConvertObject(user);
+            foreach(var item in categories)
+            {
+                homeModel.categories.Add(mapCategoryEntityToModel.ConvertObject(item));
+            }
+           
+                       return View(homeModel);
         }
 
         [HttpGet]
