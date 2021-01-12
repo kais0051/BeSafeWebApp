@@ -69,6 +69,9 @@ namespace BeSafeWebApp
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserBusinessLogic, UserBusinessLogic>();
 
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryBusinessLogic, CategoryBusinessLogic>();
+
 
         }
 

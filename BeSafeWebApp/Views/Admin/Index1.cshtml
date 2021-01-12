@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeSafeWebApp.Contracts.Models.User
+@{
     ViewData["Title"] = "Home Page";
 }
 <style>
@@ -89,26 +90,26 @@
     <div class="col-md-12">
         <!-- Horizontal Form -->
         <div class="panel panel-success">
-           
+
             <!-- /.panel-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <div class="form-horizontal">
                 <div class="panel-body">
                     <div class="panel-header with-border">
-                        <h2 class="panel-title text-center"  style="margin-top: 10px">DÉFINIR L'ARBORESCENCE</h2>
+                        <h2 class="panel-title text-center" style="margin-top: 10px">DÉFINIR L'ARBORESCENCE</h2>
                     </div>
-                    <div class="panel-group" id="accordion" role="tablist"
-                         aria-multiselectable="true">
+
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        @await Html.PartialAsync("_ViewAll", Model)
                     </div>
 
                     <div class="col-md-12 " style="margin-top:15px;">
-                        <button class="btn btn-success text-left" id="addButton" value=""><span class="glyphicon glyphicon-plus"></span> Ajouter nouveau dossier</button>
+                        <button class="btn btn-success text-left" id="AddCatagory" value=""><span class="glyphicon glyphicon-plus"></span> Ajouter nouveau dossier</button>
                     </div>
-                 <div class="col-md-12 " style="margin-top:15px;">
+
+                    <div class="col-md-12 " style="margin-top:15px;">
                         <button class="btn btn-warning text-primary text-center" id="Valider" value=""><span class="glyphicon glyphicon-ok"></span> Valider</button>
                     </div>
-
-
 
                 </div>
                 <!-- /.panel-body -->
@@ -119,9 +120,12 @@
 
                 </div>
                 <!-- /.box-footer -->
-            </form>
+            </div>
         </div>
     </div>
 
 </div><!--/.row-->
+@section Scripts {
 
+
+}

@@ -15,24 +15,36 @@ namespace BeSafeWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        private IUserBusinessLogic UserBusinessLogic;
-        private IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> mapEntityToModel;
-        private IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> mapModelToEntity;
+        private IUserBusinessLogic userBusinessLogic;
+        private IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> mapUserEntityToModel;
+        private IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> mapUserModelToEntity;
+
+        private ICategoryBusinessLogic categoryBusinessLogic;
+        private IAutoMapConverter<BeSafeEntities.Category, BeSafeModels.Category> mapCategoryEntityToModel;
+        private IAutoMapConverter<BeSafeModels.Category, BeSafeEntities.Category> mapCategoryModelToEntity;
 
         private IOptions<AppConfig> config { get; set; }
-        public AdminController(IUserBusinessLogic userBusinessLogic,
+        public AdminController(IUserBusinessLogic userBusiness, ICategoryBusinessLogic categoryBusiness,
                                   IOptions<AppConfig> appConfig)
         {
-            UserBusinessLogic = userBusinessLogic;
+            this.userBusinessLogic = userBusiness;
+            this.categoryBusinessLogic = categoryBusiness;
             config = appConfig;
         }
 
-       
+
+        [HttpGet]
+        public ActionResult Index1()
+        {
+            var users = userBusinessLogic.GetUsers().Result;
+            var category = categoryBusinessLogic.GetAllCategories().Result;
+            return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
+        }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var users = UserBusinessLogic.GetUsers().Result;
+            var users = userBusinessLogic.GetUsers().Result;
             return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
         }
 

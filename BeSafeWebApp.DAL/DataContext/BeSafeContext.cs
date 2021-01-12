@@ -24,6 +24,13 @@ namespace BeSafeWebApp.DLL
             //base.OnModelCreating(builder);
             builder.Entity<User>().ToTable("User");
             builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<Category>(entity =>
+            {
+                entity
+                    .HasMany(e => e.Children)
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey(e => e.ParentCategoryId);
+            });
             //builder.Entity<ProductStatusType>().ToTable("ProductStatusType");
 
             //For GetProductListSp.

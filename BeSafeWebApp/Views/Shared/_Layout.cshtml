@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BeSafe - Dashboard</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/datepicker3.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/font-awesome.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/datepicker3.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/styles.css")" rel="stylesheet">
 
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -150,15 +150,15 @@
         @RenderBody();
     </div>	<!--/.main-->
 
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/chart.min.js"></script>
-    <script src="js/chart-data.js"></script>
-    <script src="js/easypiechart.js"></script>
-    <script src="js/easypiechart-data.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/custom.js"></script>
-
+    <script src="@Url.Content("~/js/jquery-1.11.1.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/chart.min.js")"></script>
+    <script src="@Url.Content("~/js/chart-data.js")"></script>
+    <script src="@Url.Content("~/js/easypiechart.js")"></script>
+    <script src="@Url.Content("~/js/easypiechart-data.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/js/custom.js")"></script>
+    @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
             var counter = 1;
@@ -244,13 +244,13 @@
                 $('#panel' + accesskey).find('#TextBoxDiv' + accesskey).append('<div class="col-md-12 form-group">' +
                     '	<div class="form-group">' +
                     '<select style="width: 40%;float: left;" class="form-control" name="ctgtext[]"> ' +
-                    '<option value="value1" >Sélectionné</option>                                                      '+
-                   '<option value="Document">Document</option>                                                      '+
-                   '<option value="Image" >Image</option>                                                      '+
-                   '<option value="Lien">Lien</option>                                                      '+
-                   '<option value="AUTRE">AUTRE</option>                                                      '+
-                    '</select > '+
-                     '<a href="#" class="remove_field exit-btn"><span class="glyphicon glyphicon-remove"></a></div></div>');
+                    '<option value="value1" >Sélectionné</option>                                                      ' +
+                    '<option value="Document">Document</option>                                                      ' +
+                    '<option value="Image" >Image</option>                                                      ' +
+                    '<option value="Lien">Lien</option>                                                      ' +
+                    '<option value="AUTRE">AUTRE</option>                                                      ' +
+                    '</select > ' +
+                    '<a href="#" class="remove_field exit-btn"><span class="glyphicon glyphicon-remove"></a></div></div>');
 
             });
 
