@@ -12,11 +12,15 @@ namespace EF6CodeFirstDemo
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class User
     {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public Nullable<int> ParentCategoryId { get; set; }
-        public string Remarks { get; set; }
+        public long ID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string ContactNumber { get; set; }
+        public string Phone { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

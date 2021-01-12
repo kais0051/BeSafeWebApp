@@ -70,11 +70,18 @@
     <Compile Include="Categories.cs">
       <DependentUpon>BeSafe.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeRepository.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
+    <Compile Include="IGenericRepository.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MasterItems.cs">
       <DependentUpon>BeSafe.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>BeSafe.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

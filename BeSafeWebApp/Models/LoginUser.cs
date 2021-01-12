@@ -1,12 +1,12 @@
 ﻿namespace BeSafeWebApp.Models
 {
-    public class User
+    public class LoginUser
     {
-        public User()
+        public LoginUser()
         {
         }
 
-        public User(string v1, string v2)
+        public LoginUser(string v1, string v2)
         {
             login = v1;
             password = v2;

@@ -4,11 +4,53 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeSafeWebApp.Contracts.Interfaces;
+using BeSafeWebApp.Contracts.Configurations;
+using Microsoft.Extensions.Options;
+using BeSafeWebApp.Common;
+using BeSafeEntities = BeSafeWebApp.Contracts.Entities;
+using BeSafeModels = BeSafeWebApp.Contracts.Models;
 
 namespace BeSafeWebApp.Controllers
 {
     public class UserController : Controller
     {
+        private IUserBusinessLogic UserBusinessLogic;
+        private IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> mapEntityToModel;
+        private IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> mapModelToEntity;
+
+        private IOptions<AppConfig> config { get; set; }
+        public UserController(IUserBusinessLogic userBusinessLogic,
+                                  IOptions<AppConfig> appConfig)
+        {
+            UserBusinessLogic = userBusinessLogic;
+            config = appConfig;
+        }
+
+
+
+        // GET: AdminController
+        [HttpGet]
+        public ActionResult Login()
+        {
+
+            return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
+        }
+        [HttpPost]
+        public ActionResult Login(BeSafeModels.User user)
+        {
+            var LogedinUser = UserBusinessLogic.UserValidation(user.UserName, user.Password).Result;
+            if (LogedinUser.ID > 0)
+            {
+
+                return RedirectToAction("Index","Admin");
+            }
+            else
+            {
+                return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
+            }
+
+        }
         // GET: UserController
         public ActionResult Index()
         {

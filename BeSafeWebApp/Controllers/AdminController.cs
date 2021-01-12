@@ -4,19 +4,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BeSafeWebApp.Models;
+using BeSafeWebApp.Contracts.Interfaces;
+using BeSafeWebApp.Contracts.Configurations;
+using Microsoft.Extensions.Options;
+using BeSafeWebApp.Common;
+using BeSafeEntities = BeSafeWebApp.Contracts.Entities;
+using BeSafeModels = BeSafeWebApp.Contracts.Models;
 
 namespace BeSafeWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: AdminController
-        public ActionResult Index(User user)
+        private IUserBusinessLogic UserBusinessLogic;
+        private IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> mapEntityToModel;
+        private IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> mapModelToEntity;
+
+        private IOptions<AppConfig> config { get; set; }
+        public AdminController(IUserBusinessLogic userBusinessLogic,
+                                  IOptions<AppConfig> appConfig)
         {
-            return View(new User() { login = "admin", password = "admin" });
+            UserBusinessLogic = userBusinessLogic;
+            config = appConfig;
         }
 
-     
+       
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var users = UserBusinessLogic.GetUsers().Result;
+            return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
+        }
+
+
         //// GET: AdminController/Details/5
         //public ActionResult Details(int id)
         //{

@@ -1,6 +1,11 @@
+using BeSafeWebApp.BLL;
+using BeSafeWebApp.Contracts.Configurations;
+using BeSafeWebApp.Contracts.Interfaces;
+using BeSafeWebApp.DLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +29,47 @@ namespace BeSafeWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession();
+
+
+            //Also make top level configuration available (for EF configuration and access to connection string)
+            services.AddSingleton(Configuration); //IConfigurationRoot
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            //Add Support for strongly typed Configuration and map to class
+            services.AddOptions();
+            services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
+
+            //Set database.
+            if (Configuration["AppConfig:UseInMemoryDatabase"] == "true")
+            {
+                services.AddDbContext<BeSafeContext>(opt => opt.UseInMemoryDatabase("BeSafeMemory"));
+            }
+            else
+            {
+                services.AddDbContext<BeSafeContext>(c =>
+                    c.UseSqlServer(Configuration.GetConnectionString("SQLServerconnectionString")));
+            }
+
+            //Cors policy is added to controllers via [EnableCors("CorsPolicy")]
+            //or .UseCors("CorsPolicy") globally
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        //.AllowCredentials() //Core 3.0 removed.
+                        );
+            });
+
+            //Instance injection
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserBusinessLogic, UserBusinessLogic>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +86,7 @@ namespace BeSafeWebApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -50,7 +97,7 @@ namespace BeSafeWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=Login}/{id?}");
             });
         }
     }
