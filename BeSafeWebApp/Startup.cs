@@ -1,4 +1,5 @@
 using BeSafeWebApp.BLL;
+using BeSafeWebApp.Common;
 using BeSafeWebApp.Contracts.Configurations;
 using BeSafeWebApp.Contracts.Interfaces;
 using BeSafeWebApp.DLL;
@@ -65,6 +66,7 @@ namespace BeSafeWebApp
             });
 
             //Instance injection
+            services.AddScoped(typeof(IAutoMapConverter<,>), typeof(AutoMapConverter<,>));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserBusinessLogic, UserBusinessLogic>();

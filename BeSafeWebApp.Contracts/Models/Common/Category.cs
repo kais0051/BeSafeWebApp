@@ -6,6 +6,11 @@ namespace BeSafeWebApp.Contracts.Models
 
     public class Category
     {
+        public Category()
+        {
+           // Parent = new Category();
+           // Children = new List<Category>();
+        }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int? ParentCategoryId { get; set; }
@@ -14,5 +19,6 @@ namespace BeSafeWebApp.Contracts.Models
 
         public ICollection<Category> Children { get; set; }
 
+        public string categoryAction { get; set; }
     }
 }

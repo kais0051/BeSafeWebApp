@@ -125,7 +125,12 @@ namespace BeSafeWebApp.Common
                 return text;
             }
             return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
-        } 
+        }
+
+        public static string SetEmptyIfNull(this string source)
+        {
+            return !string.IsNullOrEmpty(source) ? source : string.Empty;
+        }
     }
 
     public class NameValue

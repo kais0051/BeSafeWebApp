@@ -12,7 +12,7 @@ namespace BeSafeWebApp.Contracts.Models
 
         [JsonProperty(PropertyName = "UserName")]
         [Display(Name = "User Name")]
-        [Required(ErrorMessage = "User Name is required<br/>")]
+        //[Required(ErrorMessage = "User Name is required<br/>")]
         public string UserName { get; set; }
 
         [JsonProperty(PropertyName = "Password")]
@@ -44,6 +44,6 @@ namespace BeSafeWebApp.Contracts.Models
 
         [JsonProperty(PropertyName = "CreatedDate")]
         [Display(Name = "CreatedDate")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

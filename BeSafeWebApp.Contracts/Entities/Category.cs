@@ -9,7 +9,8 @@ namespace BeSafeWebApp.Contracts.Entities
     public class Category
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+       // [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int? ParentCategoryId { get; set; }

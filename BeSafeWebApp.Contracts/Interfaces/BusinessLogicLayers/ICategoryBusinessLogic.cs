@@ -8,7 +8,9 @@ namespace BeSafeWebApp.Contracts.Interfaces
     {
         Task<IList<Entities.Category>> GetAllCategories();
         Task<Entities.Category> GetCategoryById(int id);
-
+        Task<Entities.Category> AddCategory(Entities.Category category);
+        Task<Entities.Category> UpdateCategory(Entities.Category category);
+        Task DeleteCategory(Entities.Category category);
     }
 
 }

@@ -15,7 +15,7 @@ namespace BeSafeWebApp.Common
         {
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TSourceObj, TDestinationObj>();
+                cfg.CreateMap<TSourceObj, TDestinationObj>().ReverseMap();
                 //cfg.AddProfile(); //... 
             });
             mapper = config.CreateMapper();
