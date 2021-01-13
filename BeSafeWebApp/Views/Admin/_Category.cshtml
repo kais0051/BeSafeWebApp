@@ -5,7 +5,7 @@
         <a class="" id="@("panel-lebel"+Model.CategoryId)" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse"+Model.CategoryId)" aria-expanded="true" aria-controls="@("collapse"+Model.CategoryId)"> @Model.CategoryName </a>
         <div class="actions_div" style="position: relative; top: -26px;">
 
-            <a href="#" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("AddOrEditCategory","Admin",null,Context.Request.Scheme)','@Model.CategoryId')">
+            <a href="#" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("Delete","Admin",null,Context.Request.Scheme)','@Model.CategoryId')">
                 <span class="glyphicon glyphicon-remove"></span>
             </a>
             
