@@ -112,25 +112,14 @@ namespace BeSafeWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Insert
-                if (CategoryId == 0)
+                try
                 {
-                    try
+                    if (CategoryId == 0)
                     {
                         var CategoryEntity = mapCategoryModelToEntity.ConvertObject(category);
                         await categoryBusinessLogic.AddCategory(CategoryEntity);
                     }
-                    catch (Exception ex)
-                    {
-
-                        throw;
-                    }
-
-                }
-                //Update
-                else
-                {
-                    try
+                    else
                     {
                         switch (category.categoryAction.SetEmptyIfNull().ToUpper())
                         {
@@ -150,13 +139,14 @@ namespace BeSafeWebApp.Controllers
                                 await categoryBusinessLogic.UpdateCategory(CategoryEntity);
                                 break;
                         }
-
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        throw;
                     }
                 }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
                 var categories = categoryBusinessLogic.GetAllCategories().Result;
                 var categoryModel = mapCategoryEntityToModel.ConvertObjectCollection(categories);
                 return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAllCategory", categoryModel) });
@@ -165,17 +155,22 @@ namespace BeSafeWebApp.Controllers
         }
 
         // POST: Transaction/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int categoryId)
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string CategoryId)
         {
-            var CategoryEntity = await categoryBusinessLogic.GetCategoryById(categoryId);
+            int intCategoryId = Convert.ToInt32(CategoryId);
+            var CategoryEntity = await categoryBusinessLogic.GetCategoryById(intCategoryId);
             await categoryBusinessLogic.DeleteCategory(CategoryEntity);
             var categories = categoryBusinessLogic.GetAllCategories().Result;
             var categoryModel = mapCategoryEntityToModel.ConvertObjectCollection(categories);
             return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAllCategory", categoryModel) });
         }
 
+        public class catModel
+        {
+            public string CategoryId { get; set; }
+        }
         //// GET: AdminController/Details/5
         //public ActionResult Details(int id)
         //{

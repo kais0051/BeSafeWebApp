@@ -62,12 +62,16 @@ jQueryAjaxPost = form => {
 DeleteCategory = (url, id) => {
     if (confirm('Are you sure to delete this record ?')) {
         try {
+            
             $.ajax({
                 type: 'POST',
                 url: url,
-                data:  {categoryId:id},
-                contentType: false,
-                processData: false,
+                data: { CategoryId: id },
+                contentType: 'application/x-www-form-urlencoded',
+               // contentType: "application/json",
+               // dataType: 'json',
+                //contentType: false,
+                //processData: false,
                 success: function (res) {
                     //$('#view-all').html(res.html);
                     $('#accordion').html(res.html)

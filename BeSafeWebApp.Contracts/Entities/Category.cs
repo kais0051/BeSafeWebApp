@@ -11,9 +11,9 @@ namespace BeSafeWebApp.Contracts.Entities
         [Key]
        // [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public int? ParentCategoryId { get; set; }
+        public long? ParentCategoryId { get; set; }
         public string Remarks { get; set; }
         public virtual Category Parent { get; set; }
 

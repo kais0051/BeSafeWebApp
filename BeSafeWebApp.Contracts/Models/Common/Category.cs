@@ -11,9 +11,9 @@ namespace BeSafeWebApp.Contracts.Models
            // Parent = new Category();
            // Children = new List<Category>();
         }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public int? ParentCategoryId { get; set; }
+        public long? ParentCategoryId { get; set; }
         public string Remarks { get; set; }
         public Category Parent { get; set; }
 

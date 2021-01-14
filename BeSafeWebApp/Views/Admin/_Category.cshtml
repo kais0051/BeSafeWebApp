@@ -5,19 +5,19 @@
         <a class="" id="@("panel-lebel"+Model.CategoryId)" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse"+Model.CategoryId)" aria-expanded="true" aria-controls="@("collapse"+Model.CategoryId)"> @Model.CategoryName </a>
         <div class="actions_div" style="position: relative; top: -26px;">
 
-            <a href="#" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("Delete","Admin",null,Context.Request.Scheme)','@Model.CategoryId')">
+            <a href="@("#panel-lebel"+Model.CategoryId)" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("Delete","Admin",null,Context.Request.Scheme)','@Model.CategoryId')">
                 <span class="glyphicon glyphicon-remove"></span>
             </a>
-            
-            @*<form asp-action="Delete" asp-route-id="@Model.CategoryId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
-                <input type="hidden" asp-for="@Model.CategoryId" />
-                <input type="submit" value="Delete" class="btn btn-danger" />
-            </form>*@
 
-            <a href="#" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId,categoryAction="Edit"},Context.Request.Scheme)','Update Category')" accesskey="@(Model.CategoryId)" class="pull-right">
+            @*<form asp-action="Delete" asp-route-id="@Model.CategoryId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                    <input type="hidden" asp-for="@Model.CategoryId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>*@
+
+            <a href="@("#panel-lebel"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId,categoryAction="Edit"},Context.Request.Scheme)','Update Category')" accesskey="@(Model.CategoryId)" class="pull-right">
                 <span class="glyphicon glyphicon-edit"></span> Edit
             </a>
-            <a href="#" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId, categoryAction="Add"},Context.Request.Scheme)','Add Sub Category')" accesskey="@(Model.CategoryId)" class="pull-right">
+            <a href="@("#panel-lebel"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId, categoryAction="Add"},Context.Request.Scheme)','Add Sub Category')" accesskey="@(Model.CategoryId)" class="pull-right">
                 <span class="glyphicon glyphicon-plus"></span> Ajouter une sous section
             </a>
         </div>
@@ -28,7 +28,8 @@
         <div id="TextBoxDiv1">
             <div class="col-md-12 form-group">
             </div>
-        </div><a class="btn btn-xs btn-primary" accesskey="1" id="addButton3">
+        </div>
+        <a class="btn btn-xs btn-primary" accesskey="1" id="addButton3">
             <span class="glyphicon glyphicon-plus"></span> Ajouter de nouveaux element
         </a>
         <a class="btn btn-xs btn-success" accesskey="1" id="ajax_submit_button">Valider</a>
