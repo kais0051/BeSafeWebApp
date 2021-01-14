@@ -25,13 +25,20 @@ namespace BeSafeWebApp.Controllers
         private IAutoMapConverter<BeSafeEntities.Category, BeSafeModels.Category> mapCategoryEntityToModel;
         private IAutoMapConverter<BeSafeModels.Category, BeSafeEntities.Category> mapCategoryModelToEntity;
 
+        private IMasterItemBusinessLogic masterItemBusinessLogic;
+        private IAutoMapConverter<BeSafeEntities.MasterItemsSet, BeSafeModels.MasterItemsSet> mapMasterItemEntityToModel;
+        private IAutoMapConverter<BeSafeModels.MasterItemsSet, BeSafeEntities.MasterItemsSet> mapMasterItemModelToEntity;
+
         private IOptions<AppConfig> config { get; set; }
         public AdminController(IUserBusinessLogic userBusiness,
                                 ICategoryBusinessLogic categoryBusiness,
+                                IMasterItemBusinessLogic masterItemBusiness,
                                 IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> convertUEntityToModel,
                                 IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> convertUModelToEntity,
                                 IAutoMapConverter<BeSafeEntities.Category, BeSafeModels.Category> mapCEntityToModel,
                                 IAutoMapConverter<BeSafeModels.Category, BeSafeEntities.Category> mapCModelToEntity,
+                                 IAutoMapConverter<BeSafeEntities.MasterItemsSet, BeSafeModels.MasterItemsSet> mapItemEntityToModel,
+                                IAutoMapConverter<BeSafeModels.MasterItemsSet, BeSafeEntities.MasterItemsSet> mapItemModelToEntity,
                                   IOptions<AppConfig> appConfig)
         {
             this.userBusinessLogic = userBusiness;
@@ -40,6 +47,9 @@ namespace BeSafeWebApp.Controllers
             this.mapCategoryEntityToModel = mapCEntityToModel;
             this.mapCategoryModelToEntity = mapCModelToEntity;
             this.categoryBusinessLogic = categoryBusiness;
+            this.masterItemBusinessLogic = masterItemBusiness;
+            this.mapMasterItemEntityToModel = mapItemEntityToModel;
+            this.mapMasterItemModelToEntity = mapItemModelToEntity;
             config = appConfig;
         }
 
@@ -89,26 +99,34 @@ namespace BeSafeWebApp.Controllers
 
 
         [NoDirectAccess]
-        public async Task<IActionResult> AddOrEditCategory(int categoryId = 0, string categoryAction = "")
+        public async Task<IActionResult> AddOrEditCategory(long categoryId = 0, string categoryAction = "")
         {
-            if (categoryId == 0)
-                return View(new BeSafeModels.Category());
-            else
+            try
             {
-                var CategoryEntity = await categoryBusinessLogic.GetCategoryById(categoryId);
-                var CategoryModel = mapCategoryEntityToModel.ConvertObject(CategoryEntity);
-                if (CategoryModel == null)
+                if (categoryId == 0)
+                    return View(new BeSafeModels.Category());
+                else
                 {
-                    return NotFound();
+                    var CategoryEntity = await categoryBusinessLogic.GetCategoryById(categoryId);
+                    var CategoryModel = mapCategoryEntityToModel.ConvertObject(CategoryEntity);
+                    if (CategoryModel == null)
+                    {
+                        return NotFound();
+                    }
+                    CategoryModel.categoryAction = categoryAction;
+                    return View(CategoryModel);
                 }
-                CategoryModel.categoryAction = categoryAction;
-                return View(CategoryModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEditCategory(int CategoryId, [Bind("CategoryId,CategoryName,ParentCategoryId,Remarks,categoryAction")] BeSafeModels.Category category)
+        public async Task<IActionResult> AddOrEditCategory(long CategoryId, [Bind("CategoryId,CategoryName,ParentCategoryId,Remarks,categoryAction")] BeSafeModels.Category category)
         {
             if (ModelState.IsValid)
             {
@@ -157,7 +175,7 @@ namespace BeSafeWebApp.Controllers
         // POST: Transaction/Delete/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string CategoryId)
+        public async Task<IActionResult> DeleteCategory(string CategoryId)
         {
             int intCategoryId = Convert.ToInt32(CategoryId);
             var CategoryEntity = await categoryBusinessLogic.GetCategoryById(intCategoryId);
@@ -167,78 +185,7 @@ namespace BeSafeWebApp.Controllers
             return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAllCategory", categoryModel) });
         }
 
-        public class catModel
-        {
-            public string CategoryId { get; set; }
-        }
-        //// GET: AdminController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
 
-        //// GET: AdminController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: AdminController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: AdminController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: AdminController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: AdminController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: AdminController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
+        
     }
 }

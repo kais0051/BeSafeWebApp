@@ -18,7 +18,7 @@ namespace BeSafeWebApp.Contracts.Entities
         public virtual Category Parent { get; set; }
 
         public virtual ICollection<Category> Children { get; set; }
-
+       // public virtual ICollection<MasterItemsSet> MasterItems { get; set; }
     }
 
 }

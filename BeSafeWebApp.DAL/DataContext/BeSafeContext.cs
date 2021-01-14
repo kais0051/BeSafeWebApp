@@ -18,6 +18,7 @@ namespace BeSafeWebApp.DLL
 
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<MasterItemsSet> MasterItemsSets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +32,8 @@ namespace BeSafeWebApp.DLL
                     .WithOne(e => e.Parent)
                     .HasForeignKey(e => e.ParentCategoryId);
             });
-            //builder.Entity<ProductStatusType>().ToTable("ProductStatusType");
+            builder.Entity<MasterItemsSet>().ToTable("MasterItemsSet");
+            
 
             //For GetProductListSp.
             //builder.Query<Models.ProductCM>();

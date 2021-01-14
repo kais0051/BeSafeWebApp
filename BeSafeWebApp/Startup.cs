@@ -74,6 +74,8 @@ namespace BeSafeWebApp
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryBusinessLogic, CategoryBusinessLogic>();
 
+            services.AddScoped<IMasterItemRepository, MasterItemRepository>();
+            services.AddScoped<IMasterItemBusinessLogic, MasterItemBusinessLogic>();
 
         }
 

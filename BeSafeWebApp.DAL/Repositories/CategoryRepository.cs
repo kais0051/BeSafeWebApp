@@ -28,7 +28,7 @@ namespace BeSafeWebApp.DLL
             return categories.ToList();
         }
 
-        public async Task<Entities.Category> GetCategoryById(int id)
+        public async Task<Entities.Category> GetCategoryById(long id)
         {
             return await this.GetByIdAsync(id);
         }

@@ -25,7 +25,7 @@ namespace BeSafeWebApp.BLL
             return await this._categoryRepository.GetAllCategories();
         }
 
-        public async Task<Entities.Category> GetCategoryById(int id)
+        public async Task<Entities.Category> GetCategoryById(long id)
         {
             return await this._categoryRepository.GetCategoryById(id);
         }
