@@ -25,6 +25,7 @@ namespace BeSafeWebApp.DLL
             //base.OnModelCreating(builder);
             builder.Entity<User>().ToTable("User");
             builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<MasterItemsSet>().ToTable("MasterItemsSet");
             builder.Entity<Category>(entity =>
             {
                 entity
@@ -32,9 +33,16 @@ namespace BeSafeWebApp.DLL
                     .WithOne(e => e.Parent)
                     .HasForeignKey(e => e.ParentCategoryId);
             });
-            builder.Entity<MasterItemsSet>().ToTable("MasterItemsSet");
-            
 
+                       builder.Entity<Category>(entity =>
+            {
+                entity
+                    .HasMany(e => e.MasterItems)
+                    .WithOne(e => e.Category)
+                    .HasForeignKey(e => e.CategoryId);
+                    //.OnDelete(DeleteBehavior.NoAction);
+            });
+            
             //For GetProductListSp.
             //builder.Query<Models.ProductCM>();
             //Core 3.0:

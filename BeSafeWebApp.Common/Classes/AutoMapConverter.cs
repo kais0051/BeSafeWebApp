@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities=BeSafeWebApp.Contracts.Entities;
+using Models= BeSafeWebApp.Contracts.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +17,11 @@ namespace BeSafeWebApp.Common
         {
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TSourceObj, TDestinationObj>().ReverseMap();
+               // cfg.CreateMap<TSourceObj, TDestinationObj>().ReverseMap();
+
+                cfg.CreateMap<Entities.Category, Models.Category>().ReverseMap();
+                cfg.CreateMap<Entities.User, Models.User>().ReverseMap();
+                cfg.CreateMap<Entities.MasterItemsSet, Models.MasterItemsSet>().ReverseMap();
                 //cfg.AddProfile(); //... 
             });
             mapper = config.CreateMapper();

@@ -38,9 +38,9 @@ jQueryAjaxPost = form => {
             processData: false,
             success: function (res) {
                 if (res.isValid) {
-                   // $('#view-all').html(res.html)
+                    // $('#view-all').html(res.html)
                     $('#accordion').html(res.html)
-                    
+
                     $('#form-modal .modal-body').html('');
                     $('#form-modal .modal-title').html('');
                     $('#form-modal').modal('hide');
@@ -62,14 +62,14 @@ jQueryAjaxPost = form => {
 DeleteCategory = (url, id) => {
     if (confirm('Are you sure to delete this record ?')) {
         try {
-            
+
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: { CategoryId: id },
                 contentType: 'application/x-www-form-urlencoded',
-               // contentType: "application/json",
-               // dataType: 'json',
+                // contentType: "application/json",
+                // dataType: 'json',
                 //contentType: false,
                 //processData: false,
                 success: function (res) {
@@ -115,7 +115,7 @@ jQueryAjaxDelete = form => {
     return false;
 }
 
-showInPopupMasterItemsSet = (url, title,catid) => {
+showInPopupMasterItemsSet = (url, title, catid) => {
     $.ajax({
         type: 'GET',
         url: url,
@@ -129,4 +129,37 @@ showInPopupMasterItemsSet = (url, title,catid) => {
             });
         }
     })
+
+    jQueryAjaxPostForCategoryItem = form => {
+        try {
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.isValid) {
+                        // $('#view-all').html(res.html)
+                        var catdiv = '#divCategoryMasterItemPanel'+$('#CategoryId').val();
+                        $(catdiv).html(res.html);
+
+                        $('#form-modal .modal-body').html('');
+                        $('#form-modal .modal-title').html('');
+                        $('#form-modal').modal('hide');
+                    }
+                    else
+                        $('#form-modal .modal-body').html(res.html);
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+            //to prevent default form submit event
+            return false;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
 }

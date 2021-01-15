@@ -131,6 +131,14 @@ namespace BeSafeWebApp.Common
         {
             return !string.IsNullOrEmpty(source) ? source : string.Empty;
         }
+        public static string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
+        }
     }
 
     public class NameValue

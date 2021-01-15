@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BeSafeWebApp.Contracts.Entities
 {
     [Table("MasterItemsSet")]
-   public class MasterItemsSet
+    public class MasterItemsSet
     {
         [Key]
         // [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -19,5 +19,6 @@ namespace BeSafeWebApp.Contracts.Entities
         public string Description { get; set; }
         public string ItemLink { get; set; }
         public DateTime CreatedDate { get; set; }
+        public Category Category { get; set; }
     }
 }

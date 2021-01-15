@@ -18,7 +18,7 @@ namespace BeSafeWebApp.Contracts.Models
         public Category Parent { get; set; }
 
         public ICollection<Category> Children { get; set; }
-
+        public ICollection<MasterItemsSet> MasterItems { get; set; }
         public string categoryAction { get; set; }
     }
 }

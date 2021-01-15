@@ -25,16 +25,18 @@
 </div>
 <div id="@("collapse"+Model.CategoryId)" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@("heading"+Model.CategoryId)">
     <div class="panel-body">
-        <div id="TextBoxDiv1">
-            <div class="col-md-12 form-group">
-            </div>
+        <div id="@("divCategoryMasterItemPanel"+Model.CategoryId)">
+            @if (Model.MasterItems.Count > 0)
+            {
+            @await Html.PartialAsync("_ViewAllMasterItem", Model.MasterItems)
+            }
         </div>
-        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditMasterItem","Admin",null,Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
+        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditCategoryItem","Admin",new { categoryId=Model.CategoryId},Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
             <span class="glyphicon glyphicon-plus"></span> Ajouter de nouveaux element
         </a>
         @*<a class="btn btn-xs btn-primary" accesskey="1" id="addButton3">
             <span class="glyphicon glyphicon-plus"></span> Ajouter de nouveaux element
         </a>*@
-        <a class="btn btn-xs btn-success" accesskey="1" id="ajax_submit_button">Valider</a>
+        @*<a class="btn btn-xs btn-success" accesskey="1" id="ajax_submit_button">Valider</a>*@
     </div>
 </div>

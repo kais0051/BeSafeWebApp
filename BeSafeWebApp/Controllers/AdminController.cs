@@ -12,11 +12,14 @@ using BeSafeEntities = BeSafeWebApp.Contracts.Entities;
 using BeSafeModels = BeSafeWebApp.Contracts.Models;
 using static BeSafeWebApp.Common.Helper;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BeSafeWebApp.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IHostingEnvironment hostingEnvironment;
         private IUserBusinessLogic userBusinessLogic;
         private IAutoMapConverter<BeSafeEntities.User, BeSafeModels.User> mapUserEntityToModel;
         private IAutoMapConverter<BeSafeModels.User, BeSafeEntities.User> mapUserModelToEntity;
@@ -39,7 +42,8 @@ namespace BeSafeWebApp.Controllers
                                 IAutoMapConverter<BeSafeModels.Category, BeSafeEntities.Category> mapCModelToEntity,
                                  IAutoMapConverter<BeSafeEntities.MasterItemsSet, BeSafeModels.MasterItemsSet> mapItemEntityToModel,
                                 IAutoMapConverter<BeSafeModels.MasterItemsSet, BeSafeEntities.MasterItemsSet> mapItemModelToEntity,
-                                  IOptions<AppConfig> appConfig)
+                                  IOptions<AppConfig> appConfig,
+                                  IHostingEnvironment environment)
         {
             this.userBusinessLogic = userBusiness;
             mapUserEntityToModel = convertUEntityToModel;
@@ -51,8 +55,8 @@ namespace BeSafeWebApp.Controllers
             this.mapMasterItemEntityToModel = mapItemEntityToModel;
             this.mapMasterItemModelToEntity = mapItemModelToEntity;
             config = appConfig;
+            hostingEnvironment = environment;
         }
-
 
         [HttpGet]
         public ActionResult Index1()
@@ -66,19 +70,21 @@ namespace BeSafeWebApp.Controllers
                 //var irem = mapUserEntityToModel.ConvertObject(user);
                 homeModel.User = mapUserEntityToModel.ConvertObject(user);
                 homeModel.categories = mapCategoryEntityToModel.ConvertObjectCollection(categories);
-                // foreach (var item in categories)
-                // {
-                // homeModel.categories.Add(mapCategoryEntityToModel.ConvertObject(item));
-                //homeModel.categories.Add(new BeSafeModels.Category()
+                //foreach (var item in categories)
                 //{
-                //    CategoryId=item.CategoryId,
-                //    CategoryName=item.CategoryName,
-                //    Parent=item.Parent,
-                //    ParentCategoryId=item.ParentCategoryId,
-                //    Children=item.Children,
-                //    Remarks =item.Remarks
-                //});
-                //    }
+                //    homeModel.categories.Add(
+                //        new BeSafeModels.Category()
+                //        {
+                //            CategoryId=item.CategoryId,
+                //            CategoryName=item.CategoryName,
+                //            ParentCategoryId=item.ParentCategoryId,
+                //            Parent= mapCategoryEntityToModel.ConvertObject(item.Parent),
+                //            Children= mapCategoryEntityToModel.ConvertObjectCollection(item.Children),
+                //            MasterItems=mapMasterItemEntityToModel.ConvertObjectCollection(item.MasterItems),
+                //            Remarks=item.Remarks
+                //        }
+                //        );
+                //}
 
                 return View(homeModel);
 
@@ -96,7 +102,6 @@ namespace BeSafeWebApp.Controllers
             var users = userBusinessLogic.GetUsers().Result;
             return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
         }
-
 
         [NoDirectAccess]
         public async Task<IActionResult> AddOrEditCategory(long categoryId = 0, string categoryAction = "")
@@ -185,6 +190,79 @@ namespace BeSafeWebApp.Controllers
             return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAllCategory", categoryModel) });
         }
 
+        [NoDirectAccess]
+        public async Task<IActionResult> AddOrEditCategoryItem(long categoryId = 0, long itemId = 0, string itemAction = "")
+        {
+            try
+            {
+                if (itemId == 0)
+                {
+                    BeSafeModels.MasterItemsSet masterItem = new BeSafeModels.MasterItemsSet();
+                    masterItem.CategoryId = categoryId;
+                    return View(masterItem);
+                }
+                else
+                {
+                    var masterItemEntity = await masterItemBusinessLogic.GetMasterItemById(itemId);
+                    var masterItemModel = mapMasterItemEntityToModel.ConvertObject(masterItemEntity);
+                    
+                    if (masterItemModel == null)
+                    {
+                        return NotFound();
+                    }
+
+                    masterItemModel.itemAction = itemAction;
+                    return View(masterItemModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (ItemId == 0)
+                    {
+                        var masterItem = mapMasterItemModelToEntity.ConvertObject(masterItemsSet);
+                        if (masterItemsSet.UploadFile != null)
+                        {
+                            var uniqueFileName = Util.GetUniqueFileName(masterItemsSet.UploadFile.FileName);
+                            var uploads = Path.Combine(hostingEnvironment.WebRootPath, "UploadedMasterItem");
+                            var filePath = Path.Combine(uploads, uniqueFileName);
+                            masterItemsSet.UploadFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                            masterItem.ItemLink = uniqueFileName;
+                        }
+                        masterItem.CreatedDate = DateTime.Now;
+                        await masterItemBusinessLogic.AddMasterItem(masterItem);
+                    }
+                    else
+                    {
+                        //var masterItem = await masterItemBusinessLogic.GetMasterItemById(ItemId);
+                        //masterItem. = category.CategoryName;
+                        //masterItem.Remarks = category.Remarks;
+                        var masterItem = mapMasterItemModelToEntity.ConvertObject(masterItemsSet);
+                        //var CategoryEntity = mapCategoryModelToEntity.ConvertObject(category);
+                        await masterItemBusinessLogic.UpdateMasterItem(masterItem);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                var masterItems = masterItemBusinessLogic.GetMasterItemsByCategoryId(masterItemsSet.CategoryId).Result;
+                var masterItemsSets = mapMasterItemEntityToModel.ConvertObjectCollection(masterItems);
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAllMasterItem", masterItemsSets) });
+            }
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEditCategoryItem", masterItemsSet) });
+        }
 
         
     }

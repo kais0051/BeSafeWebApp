@@ -22,10 +22,11 @@ namespace BeSafeWebApp.DLL
 
         public async Task<IList<Entities.Category>> GetAllCategories()
         {
-            IEnumerable<Entities.Category> categories = beSafeContext.Categories.Where(x => x.Parent == null).ToList();
+            IEnumerable<Entities.Category> categories = beSafeContext.Categories.Include(x => x.MasterItems).Where(x => x.Parent == null).ToList();
             categories = Traverse(categories);
 
             return categories.ToList();
+            //return await beSafeContext.Categories.Include(x=>x.MasterItemsSets).ToListAsync();
         }
 
         public async Task<Entities.Category> GetCategoryById(long id)

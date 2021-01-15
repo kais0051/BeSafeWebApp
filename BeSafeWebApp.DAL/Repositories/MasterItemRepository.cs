@@ -21,7 +21,7 @@ namespace BeSafeWebApp.DLL
             beSafeContext = context;
         }
 
-        public async Task<IList<MasterItemsSet>> GetMasterItemsByCategoryId(int CategoryId)
+        public async Task<IList<MasterItemsSet>> GetMasterItemsByCategoryId(long CategoryId)
         {
             return  beSafeContext.MasterItemsSets.Where(x=>x.CategoryId==CategoryId).ToList();
         }

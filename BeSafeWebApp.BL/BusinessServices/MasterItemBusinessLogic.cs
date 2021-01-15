@@ -25,12 +25,12 @@ namespace BeSafeWebApp.BLL
             return await this._masterItemRepository.GetAllAsync();
         }
 
-        public async Task<MasterItemsSet> GetMasterItemById(int id)
+        public async Task<MasterItemsSet> GetMasterItemById(long id)
         {
             return await this._masterItemRepository.GetByIdAsync(id);
         }
 
-        public async Task<IList<MasterItemsSet>> GetMasterItemsByCategoryId(int id)
+        public async Task<IList<MasterItemsSet>> GetMasterItemsByCategoryId(long id)
         {
             return await this._masterItemRepository.GetMasterItemsByCategoryId(id);
         }

@@ -9,16 +9,16 @@ namespace BeSafeWebApp.Contracts.Entities
     public class Category
     {
         [Key]
-       // [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        // [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public long CategoryId { get; set; }
         public string CategoryName { get; set; }
         public long? ParentCategoryId { get; set; }
         public string Remarks { get; set; }
-        public virtual Category Parent { get; set; }
+        public Category Parent { get; set; }
 
-        public virtual ICollection<Category> Children { get; set; }
-       // public virtual ICollection<MasterItemsSet> MasterItems { get; set; }
+        public ICollection<Category> Children { get; set; }
+        public ICollection<MasterItemsSet> MasterItems { get; set; }
     }
 
 }

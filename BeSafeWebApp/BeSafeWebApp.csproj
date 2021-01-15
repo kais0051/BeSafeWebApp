@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BeSafeWebApp.DAL\BeSafeWebApp.DLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UploadedMasterItem\" />
+  </ItemGroup>
+
 </Project>
