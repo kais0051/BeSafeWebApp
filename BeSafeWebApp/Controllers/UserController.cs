@@ -39,17 +39,15 @@ namespace BeSafeWebApp.Controllers
         [HttpPost]
         public ActionResult Login(BeSafeModels.User user)
         {
-            var LogedinUser = UserBusinessLogic.UserValidation(user.UserName, user.Password).Result;
-            if (LogedinUser.ID > 0)
+            if (ModelState.IsValid)
             {
-
-                return RedirectToAction("Index1","Admin");
+                var LogedinUser = UserBusinessLogic.UserValidation(user.UserName, user.Password).Result;
+                if (LogedinUser!=null && LogedinUser.ID > 0)
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             }
-            else
-            {
-                return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
-            }
-
+            return View(user);
         }
         // GET: UserController
         public ActionResult Index()

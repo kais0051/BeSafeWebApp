@@ -1,0 +1,28 @@
+﻿@model BeSafeWebApp.Contracts.Models.Category
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEditCategory" asp-controller="Category" asp-route-id="@Model.CategoryId" onsubmit="return jQueryAjaxPost(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" />
+            <input type="hidden" asp-for="ParentCategoryId" />
+            <input type="hidden" asp-for="categoryAction" />
+            <div class="form-group">
+                <label asp-for="CategoryName"></label>
+                <input asp-for="CategoryName" class="form-control" type="text" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks"></label>
+                <input asp-for="Remarks" class="form-control" type="text" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>

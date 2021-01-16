@@ -12,12 +12,13 @@ namespace BeSafeWebApp.Contracts.Models
 
         [JsonProperty(PropertyName = "UserName")]
         [Display(Name = "User Name")]
-        //[Required(ErrorMessage = "User Name is required<br/>")]
+        [Required(ErrorMessage = "User Name is required<br/>")]
         public string UserName { get; set; }
 
         [JsonProperty(PropertyName = "Password")]
         [Display(Name = "Password")]
-       // [Range(1, 2147483647, ErrorMessage = "Please select a category<br/>")]
+        // [Range(1, 2147483647, ErrorMessage = "Please select a category<br/>")]
+        [Required(ErrorMessage = "Password is required<br/>")]
         public string Password { get; set; }
 
         [JsonProperty(PropertyName = "Name")]

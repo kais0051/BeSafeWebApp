@@ -5,7 +5,7 @@
         <a class="" id="@("panel-lebel"+Model.CategoryId)" role="button" data-toggle="collapse" data-parent="#accordion" href="@("#collapse"+Model.CategoryId)" aria-expanded="true" aria-controls="@("collapse"+Model.CategoryId)"> @Model.CategoryName </a>
         <div class="actions_div" id="@("actions_div"+Model.CategoryId)" style="position: relative; top: -26px;">
 
-            <a href="@("#actions_div"+Model.CategoryId)" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("DeleteCategory","Admin",null,Context.Request.Scheme)','@Model.CategoryId')">
+            <a href="@("#actions_div"+Model.CategoryId)" accesskey="1" class="exit-btn pull-right" onclick="DeleteCategory('@Url.Action("DeleteCategory","Category",null,Context.Request.Scheme)','@Model.CategoryId')">
                 <span class="glyphicon glyphicon-remove"></span>
             </a>
 
@@ -14,10 +14,10 @@
                     <input type="submit" value="Delete" class="btn btn-danger" />
                 </form>*@
 
-            <a href="@("#actions_div"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId,categoryAction="Edit"},Context.Request.Scheme)','Update Category')" accesskey="@(Model.CategoryId)" class="pull-right">
+            <a href="@("#actions_div"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Category",new {categoryId=Model.CategoryId,categoryAction="Edit"},Context.Request.Scheme)','Update Category')" accesskey="@(Model.CategoryId)" class="pull-right">
                 <span class="glyphicon glyphicon-edit"></span> Edit
             </a>
-            <a href="@("#actions_div"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",new {categoryId=Model.CategoryId, categoryAction="Add"},Context.Request.Scheme)','Add Sub Category')" accesskey="@(Model.CategoryId)" class="pull-right">
+            <a href="@("#actions_div"+Model.CategoryId)" onclick="showInPopup('@Url.Action("AddOrEditCategory","Category",new {categoryId=Model.CategoryId, categoryAction="Add"},Context.Request.Scheme)','Add Sub Category')" accesskey="@(Model.CategoryId)" class="pull-right">
                 <span class="glyphicon glyphicon-plus"></span> Ajouter une sous section
             </a>
         </div>
@@ -28,10 +28,10 @@
         <div id="@("divCategoryMasterItemPanel"+Model.CategoryId)">
             @if (Model.MasterItems.Count > 0)
             {
-            @await Html.PartialAsync("_ViewAllMasterItem", Model.MasterItems)
+            @await Html.PartialAsync("~/views/MasterItemSet/_ViewAllMasterItem.cshtml", Model.MasterItems)
             }
         </div>
-        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditCategoryItem","Admin",new { categoryId=Model.CategoryId},Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
+        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditCategoryItem","MasterItemSet",new { categoryId=Model.CategoryId},Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
             <span class="glyphicon glyphicon-plus"></span> Ajouter de nouveaux element
         </a>
         @*<a class="btn btn-xs btn-primary" accesskey="1" id="addButton3">

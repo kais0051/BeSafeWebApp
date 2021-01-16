@@ -2,48 +2,22 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="/">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Category</li>
+    </ol>
+</div><!--/.row-->
 
-<link href="~/css/stylesForCategory.css" rel="stylesheet" />
-<div class="panel panel-container">
-    <div class="row">
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-teal panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-shopping-cart color-blue"></em>
-                    <div class="large">120</div>
-                    <div class="text-muted">New Orders</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-blue panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-comments color-orange"></em>
-                    <div class="large">52</div>
-                    <div class="text-muted">Comments</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-orange panel-widget border-right">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-users color-teal"></em>
-                    <div class="large">24</div>
-                    <div class="text-muted">New Users</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-red panel-widget ">
-                <div class="row no-padding">
-                    <em class="fa fa-xl fa-search color-red"></em>
-                    <div class="large">25.2k</div>
-                    <div class="text-muted">Page Views</div>
-                </div>
-            </div>
-        </div>
-    </div><!--/.row-->
-</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Category</h1>
+    </div>
+</div><!--/.row-->
 <div class="row">
     <div class="col-md-12">
         <!-- Horizontal Form -->
@@ -62,23 +36,19 @@
                     </div>
 
                     <div class="col-md-12 " style="margin-top:15px;">
-                        <a onclick="showInPopup('@Url.Action("AddOrEditCategory","Admin",null,Context.Request.Scheme)','Ajouter nouveau dossier')" class="btn btn-success text-left">
+                        <a onclick="showInPopup('@Url.Action("AddOrEditCategory","Category",null,Context.Request.Scheme)','Ajouter nouveau dossier')" class="btn btn-success text-left">
                             <span class="glyphicon glyphicon-plus"></span> Ajouter nouveau dossier
                         </a>
                         @*<button class="btn btn-success text-left" id="AddCatagory" value=""><span class="glyphicon glyphicon-plus"></span> Ajouter nouveau dossier</button>*@
                     </div>
-
                     @*<div class="col-md-12 " style="margin-top:15px;">
                             <button class="btn btn-warning text-primary text-center" id="Valider" value=""><span class="glyphicon glyphicon-ok"></span> Valider</button>
                         </div>*@
-
                 </div>
                 <!-- /.panel-body -->
                 <div class="panel-footer">
                     <div class="col-sm-offset-3 col-sm-6 text-center">
-
                     </div>
-
                 </div>
                 <!-- /.box-footer -->
             </div>

@@ -30,8 +30,14 @@ namespace BeSafeWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSession();
+            services.AddDistributedMemoryCache();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             //Also make top level configuration available (for EF configuration and access to connection string)
             services.AddSingleton(Configuration); //IConfigurationRoot

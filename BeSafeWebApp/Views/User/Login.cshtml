@@ -15,9 +15,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lumino - Login</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/datepicker3.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="@Url.Content("css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("css/datepicker3.css")" rel="stylesheet">
+    <link href="@Url.Content("css/styles.css")" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -33,12 +33,14 @@
                         <fieldset>
 
                             <div class="form-group">
-                                @Html.HiddenFor(model => model.UserName)
-                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "UserName", @name = "UserName", @type = "text" } })
+                                <label asp-for="UserName"></label>
+                                <input asp-for="UserName" class="form-control" type="text" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                @Html.HiddenFor(model => model.Password)
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "password", @name = "password", @type = "password" } })
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" type="password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -48,7 +50,7 @@
                             <input type="submit" value="Login" class="btn btn-primary" />
                             @*@Html.ActionLink("Login", "Login", "Home", new { login = Model.login, password = Model.password }, new { @class = "btn btn-primary" })*@
 
-                            @Html.ActionLink("Utilisateur invité", "Index", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
+                            @Html.ActionLink("Utilisateur invité", "Register", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
 
                         </fieldset>
                     </form>
