@@ -8,7 +8,7 @@ namespace BeSafeWebApp.Contracts.Entities
     public class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public long ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

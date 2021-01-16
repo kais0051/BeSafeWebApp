@@ -14,9 +14,11 @@ using static BeSafeWebApp.Common.Helper;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeSafeWebApp.Controllers
 {
+    [Authorize]
     public class MasterItemSetController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;

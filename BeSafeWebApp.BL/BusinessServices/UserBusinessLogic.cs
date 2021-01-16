@@ -13,13 +13,13 @@ namespace BeSafeWebApp.BLL
     public class UserBusinessLogic : IUserBusinessLogic
     {
         private IUserRepository _userRepository;
-        
+
         public UserBusinessLogic(IUserRepository userRepository)
         {
             if (userRepository != null)
-                this._userRepository = userRepository;            
+                this._userRepository = userRepository;
         }
-        
+
         public async Task<IList<Entities.User>> GetUsers()
         {
             return await this._userRepository.GetUsers();
@@ -32,7 +32,11 @@ namespace BeSafeWebApp.BLL
 
         public async Task<User> UserValidation(string userName, string password)
         {
-            return await this._userRepository.UserValidation(userName,password);
+            return await this._userRepository.UserValidation(userName, password);
+        }
+        public async Task<Entities.User> AddUser(Entities.User user)
+        {
+           return await this._userRepository.InsertAsync(user, true);
         }
     }
 }

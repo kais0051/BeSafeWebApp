@@ -1,10 +1,21 @@
-﻿<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+﻿@using System.Security.Claims;
+@{
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    IEnumerable<Claim> claims = claimsIdentity.Claims;
+
+    //Claim claim = claimsIdentity?.FindFirst(ClaimTypes.Name);
+    //var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
+
+    //Filter specific claim
+    string UserName = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Name, StringComparison.OrdinalIgnoreCase))?.Value;
+}
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
             <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
         </div>
         <div class="profile-usertitle">
-            <div class="profile-usertitle-name">Username</div>
+            <div class="profile-usertitle-name">@UserName</div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
         </div>
         <div class="clear"></div>
@@ -15,9 +26,16 @@
             <input type="text" class="form-control" placeholder="Search">
         </div>
     </form>
+
     <ul class="nav menu">
         <li><a href="@Url.Action("Index", "Category")"><em class="fa fa-dashboard">&nbsp;</em> Category</a></li>
         <li><a href="@Url.Action("Index", "User")"><em class="fa fa-calendar">&nbsp;</em> User</a></li>
-        <li><a href="@Url.Action("Index", "Home")"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        <li>
+            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
+            }
+        </li>
     </ul>
 </div><!--/.sidebar-->

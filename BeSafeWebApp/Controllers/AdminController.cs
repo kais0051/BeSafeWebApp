@@ -14,9 +14,12 @@ using static BeSafeWebApp.Common.Helper;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BeSafeWebApp.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
@@ -99,7 +102,10 @@ namespace BeSafeWebApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var users = userBusinessLogic.GetUsers().Result;
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            // var users = userBusinessLogic.GetUsers().Result;
             return View(new BeSafeModels.User() { UserName = "admin", Password = "admin" });
         }
 

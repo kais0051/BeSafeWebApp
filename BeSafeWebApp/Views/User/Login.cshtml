@@ -1,13 +1,13 @@
-﻿@model BeSafeWebApp.Contracts.Models.User
+﻿@model BeSafeWebApp.Contracts.Models.UserLogin
 @{
     Layout = null;
 }
 <script type="text/javascript">
 
-    function preventBack(){window.history.forward();}
+    function preventBack() { window.history.forward(); }
     setTimeout("preventBack()", 0);
     sessionStorage.clear();
-    window.onunload=function(){null};
+    window.onunload = function () { null };
 </script>
 <!DOCTYPE html>
 <html>
@@ -15,9 +15,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lumino - Login</title>
-    <link href="@Url.Content("css/bootstrap.min.css")" rel="stylesheet">
-    <link href="@Url.Content("css/datepicker3.css")" rel="stylesheet">
-    <link href="@Url.Content("css/styles.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/datepicker3.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/styles.css")" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -29,6 +29,12 @@
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">Log in</div>
                 <div class="panel-body">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.ErrorMessage
+                        </div>
+                    }
                     <form role="form" method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Login">
                         <fieldset>
 
@@ -60,7 +66,7 @@
     </div><!-- /.row -->
 
 
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/js/jquery-1.11.1.min.js")"></script>
+    <script src="@Url.Content("~/js/bootstrap.min.js")"></script>
 </body>
 </html>

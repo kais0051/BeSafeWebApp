@@ -9,6 +9,7 @@ namespace BeSafeWebApp.Contracts.Interfaces
         Task<IList<Entities.User>> GetUsers();
         Task<Entities.User> GetUserById(int id);
         Task<Entities.User> UserValidation(string userName, string password);
+        Task<Entities.User> AddUser(Entities.User user);
     }
 
 }

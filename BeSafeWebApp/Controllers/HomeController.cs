@@ -10,9 +10,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeSafeWebApp.Manager;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BeSafeWebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,6 +26,7 @@ namespace BeSafeWebApp.Controllers
         }
         public IActionResult Index()
         {
+            
             return View(new LoginUser() { login = "admin", password = "admin" });
 
         }

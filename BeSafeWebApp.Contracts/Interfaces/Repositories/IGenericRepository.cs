@@ -29,7 +29,7 @@ namespace BeSafeWebApp.Contracts.Interfaces
         Task<TEntity> GetByIdAsync(object id);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match);
         Task<int> CountAsync();
-        Task<object> InsertAsync(TEntity entity, bool saveChanges = false);
+        Task<TEntity> InsertAsync(TEntity entity, bool saveChanges = false);
         Task DeleteAsync(object id, bool saveChanges = false);
         Task DeleteAsync(TEntity entity, bool saveChanges = false);
         Task UpdateAsync(TEntity entity, bool saveChanges = false);

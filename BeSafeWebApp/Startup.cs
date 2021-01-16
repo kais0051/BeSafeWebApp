@@ -3,8 +3,10 @@ using BeSafeWebApp.Common;
 using BeSafeWebApp.Contracts.Configurations;
 using BeSafeWebApp.Contracts.Interfaces;
 using BeSafeWebApp.DLL;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,19 @@ namespace BeSafeWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           .AddCookie(options =>
+           {
+               options.LoginPath = "/User/Login";
+               options.LogoutPath = "/User/Logout";
+           });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = ".AspNetCore.Cookies";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.SlidingExpiration = true;
+            });
+
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
 
@@ -104,6 +119,7 @@ namespace BeSafeWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

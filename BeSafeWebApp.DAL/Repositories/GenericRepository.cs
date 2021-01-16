@@ -166,7 +166,7 @@ namespace BeSafeWebApp.DLL
             return await this.DbSet.CountAsync();
         }
 
-        public virtual async Task<object> InsertAsync(TEntity entity, bool saveChanges = false)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity, bool saveChanges = false)
         {
             var rtn = await this.DbSet.AddAsync(entity);
             if (saveChanges)
@@ -181,7 +181,7 @@ namespace BeSafeWebApp.DLL
                 //    var te = ex;
                 //}
             }
-            return rtn;
+            return rtn.Entity;
         }
 
         public virtual async Task DeleteAsync(object id, bool saveChanges = false)
