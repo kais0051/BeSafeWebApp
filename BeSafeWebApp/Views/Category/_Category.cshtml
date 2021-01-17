@@ -28,10 +28,10 @@
         <div id="@("divCategoryMasterItemPanel"+Model.CategoryId)">
             @if (Model.MasterItems.Count > 0)
             {
-            @await Html.PartialAsync("~/views/MasterItemSet/_ViewAllMasterItem.cshtml", Model.MasterItems)
+            @await Html.PartialAsync("_ViewAllMasterItem", Model.MasterItems)
             }
         </div>
-        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditCategoryItem","MasterItemSet",new { categoryId=Model.CategoryId},Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
+        <a onclick="showInPopupMasterItemsSet('@Url.Action("AddOrEditCategoryItem","Category",new { categoryId=Model.CategoryId},Context.Request.Scheme)','Ajouter de nouveaux element','@Model.CategoryId')" class="btn btn-xs btn-primary">
             <span class="glyphicon glyphicon-plus"></span> Ajouter de nouveaux element
         </a>
         @*<a class="btn btn-xs btn-primary" accesskey="1" id="addButton3">

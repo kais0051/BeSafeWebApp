@@ -174,6 +174,103 @@ namespace BeSafeWebApp.Controllers
             return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAllCategory", categoryModel) });
         }
 
+        [NoDirectAccess]
+        public async Task<IActionResult> AddOrEditCategoryItem(long categoryId = 0, long itemId = 0, string itemAction = "")
+        {
+            try
+            {
+                if (itemId == 0)
+                {
+                    BeSafeModels.MasterItemsSet masterItem = new BeSafeModels.MasterItemsSet();
+                    masterItem.CategoryId = categoryId;
+                    return View(masterItem);
+                }
+                else
+                {
+                    var masterItemEntity = await masterItemBusinessLogic.GetMasterItemById(itemId);
+                    var masterItemModel = mapMasterItemEntityToModel.ConvertObject(masterItemEntity);
+
+                    if (masterItemModel == null)
+                    {
+                        return NotFound();
+                    }
+
+                    masterItemModel.itemAction = itemAction;
+                    return View(masterItemModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (ItemId == 0)
+                    {
+                        var masterItem = mapMasterItemModelToEntity.ConvertObject(masterItemsSet);
+                        if (masterItemsSet.UploadFile != null)
+                        {
+                            var uniqueFileName = Util.GetUniqueFileName(masterItemsSet.UploadFile.FileName);
+                            var uploads = Path.Combine(hostingEnvironment.WebRootPath, "UploadedMasterItem");
+                            var filePath = Path.Combine(uploads, uniqueFileName);
+                            masterItemsSet.UploadFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                            masterItem.ItemLink = uniqueFileName;
+                        }
+                        masterItem.CreatedDate = DateTime.Now;
+                        await masterItemBusinessLogic.AddMasterItem(masterItem);
+                    }
+                    else
+                    {
+                        //var masterItem = await masterItemBusinessLogic.GetMasterItemById(ItemId);
+                        //masterItem. = category.CategoryName;
+                        //masterItem.Remarks = category.Remarks;
+                        var masterItem = mapMasterItemModelToEntity.ConvertObject(masterItemsSet);
+                        //var CategoryEntity = mapCategoryModelToEntity.ConvertObject(category);
+                        await masterItemBusinessLogic.UpdateMasterItem(masterItem);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                var masterItems = masterItemBusinessLogic.GetMasterItemsByCategoryId(masterItemsSet.CategoryId).Result;
+                var masterItemsSets = mapMasterItemEntityToModel.ConvertObjectCollection(masterItems);
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAllMasterItem", masterItemsSets) });
+            }
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEditCategoryItem", masterItemsSet) });
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCategoryItem(string ItemId, string CategoryId)
+        {
+            int intItemId = Convert.ToInt32(ItemId);
+            int intCategoryId = Convert.ToInt32(CategoryId);
+            var CategoryItemEntity = await masterItemBusinessLogic.GetMasterItemById(intItemId);
+            await masterItemBusinessLogic.DeleteMasterItem(CategoryItemEntity);
+            var categoryItems = masterItemBusinessLogic.GetMasterItemsByCategoryId(intCategoryId).Result;
+            var categoryItemModel = mapMasterItemEntityToModel.ConvertObjectCollection(categoryItems);
+            return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAllMasterItem", categoryItemModel) });
+        }
+
+        public async Task<IActionResult> Download(string id)
+        {
+            int intItemId = Convert.ToInt32(id);
+            var CategoryItemEntity = await masterItemBusinessLogic.GetMasterItemById(intItemId);
+
+            var uploads = Path.Combine(hostingEnvironment.WebRootPath, "UploadedMasterItem");
+            var filePath = Path.Combine(uploads, CategoryItemEntity.ItemLink);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/x-msdownload", CategoryItemEntity.ItemLink);
+        }
 
 
     }

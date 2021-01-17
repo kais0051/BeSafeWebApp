@@ -39,7 +39,7 @@
     <script src="@Url.Content("~/js/bootstrap-datepicker.js")"></script>
     <script src="@Url.Content("~/js/custom.js")"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="@Url.Content("~/js/categorybinding.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/categorybinding.js")" ></script>
     @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
@@ -114,8 +114,6 @@
                 counter--;
                 x--;
             });
-
-
 
 
             var y = 1;

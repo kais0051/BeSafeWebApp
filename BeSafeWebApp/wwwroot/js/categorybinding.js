@@ -162,36 +162,36 @@ showInPopupMasterItemsSet = (url, title, catid) => {
         }
     }
 
-    DeleteCategoryItem = (url,id,catid) => {
-        if (confirm('Are you sure to delete this record ?')) {
-            try {
 
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: { ItemId: id, CategoryId: catid},
-                    contentType: 'application/x-www-form-urlencoded',
-                    // contentType: "application/json",
-                    // dataType: 'json',
-                    //contentType: false,
-                    //processData: false,
-                    success: function (res) {
-                        //$('#view-all').html(res.html);
-                        var catdiv = '#divCategoryMasterItemPanel' + catid;
-                        $(catdiv).html(res.html);
-                       // $('#accordion').html(res.html)
-                    },
-                    error: function (err) {
-                        console.log(err)
-                    }
-                })
-            } catch (ex) {
-                console.log(ex)
-            }
-        }
+    //DeleteCategoryItem = (url,id,catid) => {
+    //    if (confirm('Are you sure to delete this record ?')) {
+    //        try {
+    //            $.ajax({
+    //                type: 'POST',
+    //                url: url,
+    //                data: { ItemId: id, CategoryId: catid},
+    //                contentType: 'application/x-www-form-urlencoded',
+    //                // contentType: "application/json",
+    //                // dataType: 'json',
+    //                //contentType: false,
+    //                //processData: false,
+    //                success: function (res) {
+    //                    //$('#view-all').html(res.html);
+    //                    var catdiv = '#divCategoryMasterItemPanel' + catid;
+    //                    $(catdiv).html(res.html);
+    //                   // $('#accordion').html(res.html)
+    //                },
+    //                error: function (err) {
+    //                    console.log(err)
+    //                }
+    //            })
+    //        } catch (ex) {
+    //            console.log(ex)
+    //        }
+    //    }
 
-        //prevent default form submit event
-        return false;
-    }
+    //    //prevent default form submit event
+    //    return false;
+    //}
 
 }
