@@ -1,9 +1,9 @@
-﻿
-<style>
+﻿@model BeSafeWebApp.Contracts.Models.User
+    <style>
 
-    #accordion .panel-heading {
+#accordion .panel-heading {
         padding: 0;
-    }
+}
 
     #accordion .panel-title > a {
         display: block;
@@ -61,7 +61,7 @@
                                             <em class="fa fa-cog"></em> Settings
                                         </a>
                                     </li>
-                                
+
                                 </ul>
                             </li>
                         </ul>
@@ -71,42 +71,16 @@
             </div>
             <div class="panel-body">
                 <ul class="todo-list">
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-1">Admin 1</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-2">Admin 2</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-3">Admin 3</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-4">Admin 4</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-5">Admin 5</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
-                    <li class="todo-list-item">
-                        <div class="checkbox">
-                            <label for="checkbox-6">Admin 6</label>
-                        </div>
-                        <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-                    </li>
+                    @foreach (var adminUser in Model.Admins)
+                    {
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <label for="checkbox-1"> @Html.DisplayFor(modelItem => adminUser.Name)</label>
+                            </div>
+                            <div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                        </li>
+                    }
+                  
                 </ul>
             </div>
         </div>
@@ -136,41 +110,50 @@
                 <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" action="" method="post">
-                    <fieldset>
-                        <!-- Name input-->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="name">Nom</label>
-                            <div class="col-md-9">
-                                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
-                            </div>
-                        </div>
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">S'inscrire</div>
+                    <div class="panel-body">
+                        <form role="form" method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Register">
+                            <fieldset>
 
-                        <!-- Email input-->
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="email">E-mail</label>
-                            <div class="col-md-9">
-                                <input id="emails" name="email" type="text" placeholder="Email" class="form-control">
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label asp-for="UserName">Nom d'utilisateur</label>
+                                    <input asp-for="UserName" class="form-control" type="text" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password">Mot de passe</label>
+                                    <input asp-for="Password" class="form-control" type="password" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Name">Nom</label>
+                                    <input asp-for="Name" class="form-control" type="text" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" type="email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ContactNumber">Numéro de contact</label>
+                                    <input asp-for="ContactNumber" class="form-control"  />
+                                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="IsActive">actif</label>
+                                    <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="email">Mot de passe</label>
-                            <div class="col-md-9">
-                                <input id="password" name="password" type="password" placeholder="Mot de passe" class="form-control">
-                            </div>
-                        </div>
-
-                        <!-- Form actions -->
-                        <div class="form-group">
-                            <div class="col-md-12 widget-right">
-                                <button type="submit" class="btn btn-default btn-md pull-right">Submit</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                             
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
- 

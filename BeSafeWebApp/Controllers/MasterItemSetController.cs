@@ -131,7 +131,7 @@ namespace BeSafeWebApp.Controllers
                         await masterItemBusinessLogic.UpdateMasterItem(masterItem);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw;
                 }

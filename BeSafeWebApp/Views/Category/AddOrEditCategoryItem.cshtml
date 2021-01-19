@@ -9,39 +9,39 @@
             <input type="hidden" asp-for="CategoryId" />
             <input type="hidden" asp-for="itemAction" />
             <div class="form-group">
-                <label asp-for="Name"></label>
+                <label asp-for="Name">Nom</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description"></label>
+                <label asp-for="Description">Description</label>
                 <input asp-for="Description" class="form-control" type="text" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ItemType"></label>
+                <label asp-for="ItemType">Type</label>
                 <select class="form-control"
                         asp-for="ItemType"
                         asp-items="@(new SelectList(Model.ItemTypeList, "Name","Type"))">
-                    <option value="">- Select -</option>
+                    <option value="">- Sélectionner -</option>
                 </select>
 
                 <span asp-validation-for="ItemType" class="text-danger"></span>
             </div>
             <div class="form-group" id="divitemlink" style="display:none">
-                <label asp-for="ItemLink"></label>
+                <label asp-for="ItemLink">Lien</label>
                 <input asp-for="ItemLink" class="form-control" />
 
                 <span asp-validation-for="ItemLink" class="text-danger"></span>
             </div>
             <div class="form-group" id="divuploaditem" style="display:none">
-                <label asp-for="UploadFile" class="control-label"></label>
+                <label asp-for="UploadFile" class="control-label">Télécharger un fichier</label>
                 <input asp-for="UploadFile" class="form-control-file" />
                 <span asp-validation-for="UploadFile"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                <input type="submit" value="Ajouter" class="btn btn-primary btn-block" />
             </div>
         </form>
     </div>

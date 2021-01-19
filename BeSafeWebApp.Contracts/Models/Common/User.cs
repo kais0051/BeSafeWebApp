@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
@@ -48,6 +49,8 @@ namespace BeSafeWebApp.Contracts.Models
         [JsonProperty(PropertyName = "CreatedDate")]
         [Display(Name = "CreatedDate")]
         public DateTime? CreatedDate { get; set; }
+
+        public List<Entities.User> Admins { get; set; }
     }
 
     public class UserLogin

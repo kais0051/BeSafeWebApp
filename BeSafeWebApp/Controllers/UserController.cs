@@ -138,7 +138,7 @@ namespace BeSafeWebApp.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            return View();
+            return View(new BeSafeWebApp.Models.LoginUser());
         }
 
         // GET: UserController/Details/5

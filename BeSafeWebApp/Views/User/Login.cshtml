@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lumino - Login</title>
+    <title>BeSafe - Login</title>
     <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/css/datepicker3.css")" rel="stylesheet">
     <link href="@Url.Content("~/css/styles.css")" rel="stylesheet">
@@ -39,24 +39,24 @@
                         <fieldset>
 
                             <div class="form-group">
-                                <label asp-for="UserName"></label>
+                                <label asp-for="UserName">Nom d'utilisateur</label>
                                 <input asp-for="UserName" class="form-control" type="text" />
                                 <span asp-validation-for="UserName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Password"></label>
+                                <label asp-for="Password">Mot de passe</label>
                                 <input asp-for="Password" class="form-control" type="password" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
                                 </label>
                             </div>
                             <input type="submit" value="Login" class="btn btn-primary" />
                             @*@Html.ActionLink("Login", "Login", "Home", new { login = Model.login, password = Model.password }, new { @class = "btn btn-primary" })*@
 
-                            @Html.ActionLink("Utilisateur invité", "Register", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
+                            @Html.ActionLink("Utilisateur invité", "Index", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
 
                         </fieldset>
                     </form>

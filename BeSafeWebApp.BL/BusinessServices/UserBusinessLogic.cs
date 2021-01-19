@@ -38,5 +38,7 @@ namespace BeSafeWebApp.BLL
         {
            return await this._userRepository.InsertAsync(user, true);
         }
+
+       
     }
 }

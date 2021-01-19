@@ -4,15 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeSafeWebApp.BLL;
+using BeSafeWebApp.Contracts.Entities;
+using BeSafeWebApp.Contracts.Interfaces;
 
 namespace BeSafeWebApp.Controllers
 {
     public class AddAdminController : Controller
     {
-        // GET: AddAdmin
-        public ActionResult Index()
+        private IUserBusinessLogic userBusinessLogic;
+
+        public AddAdminController(IUserBusinessLogic userBusiness)
         {
-            return View();
+            this.userBusinessLogic = userBusiness;
+
+        } // GET: AddAdmin
+
+            public ActionResult Index()
+        {
+            var viewUser = new BeSafeWebApp.Contracts.Models.User();
+            viewUser.Admins= userBusinessLogic.GetUsers().Result.ToList();
+
+            return View(viewUser);
         }
 
       

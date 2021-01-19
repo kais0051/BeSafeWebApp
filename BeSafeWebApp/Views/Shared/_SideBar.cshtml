@@ -11,12 +11,19 @@
 }
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
-        <div class="profile-userpic">
+        <div style="margin-left: 50px" class="profile-userpic">
             <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
         </div>
-        <div class="profile-usertitle">
+        <div class="profile-usertitle" style="margin-left: 50px">
             <div class="profile-usertitle-name">@UserName</div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            <div class="profile-usertitle-status">
+                @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "profile-usertitle-status" }))
+                {
+                    @Html.AntiForgeryToken()
+                <a  style="margin-left: -40px" href="javascript:document.getElementById('logoutForm').submit()"><em class="fa fa-power-off">&nbsp;</em>Se déconnecter</a>
+                }
+            </div>
         </div>
         <div class="clear"></div>
     </div>
@@ -28,14 +35,8 @@
     </form>
 
     <ul class="nav menu">
-        <li><a href="@Url.Action("Index", "Category")"><em class="fa fa-dashboard">&nbsp;</em> Category</a></li>
-        <li><a href="@Url.Action("Index", "User")"><em class="fa fa-calendar">&nbsp;</em> User</a></li>
-        <li>
-            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-            {
-                @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
-            }
-        </li>
+        <li><a href="@Url.Action("Index", "Category")"><em class="fa fa-dashboard">&nbsp;</em> Arborescence</a></li>
+        <li><a href="@Url.Action("Index", "AddAdmin")"><em class="fa fa-calendar">&nbsp;</em> Admin</a></li>
+      
     </ul>
 </div><!--/.sidebar-->

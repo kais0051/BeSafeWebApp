@@ -10,9 +10,9 @@
             }
             else
             {
-                <a asp-controller="Category"
-                   asp-action="Download"
-                   asp-route-id="@masterItem.ItemId">Click Here to Download : @masterItem.Name</a>
+        <a asp-controller="Category"
+           asp-action="Download"
+           asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
             }
             <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
                 <span class="glyphicon glyphicon-remove"></span>
