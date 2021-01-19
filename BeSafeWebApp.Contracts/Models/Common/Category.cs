@@ -1,4 +1,6 @@
 
+using System.ComponentModel.DataAnnotations;
+
 namespace BeSafeWebApp.Contracts.Models
 {
     using System;
@@ -12,8 +14,11 @@ namespace BeSafeWebApp.Contracts.Models
            // Children = new List<Category>();
         }
         public long CategoryId { get; set; }
+        [StringLength(13)]
         public string CategoryName { get; set; }
         public long? ParentCategoryId { get; set; }
+
+        [StringLength(30)]
         public string Remarks { get; set; }
         public Category Parent { get; set; }
 

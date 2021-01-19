@@ -35,6 +35,14 @@ namespace BeSafeWebApp.DLL
             return await this.GetByIdAsync(id);
         }
 
+        public async Task<IList<Entities.Category>> GetCategories(long id)
+        {
+            IEnumerable<Entities.Category> categories = beSafeContext.Categories.Include(x => x.MasterItems).ToList();
+            categories = categories.Where(x => x.ParentCategoryId == id);
+
+            return categories.ToList();
+        }
+
         private IEnumerable<Entities.Category> Traverse(IEnumerable<Entities.Category> categories)
         {
             foreach (var category in categories)

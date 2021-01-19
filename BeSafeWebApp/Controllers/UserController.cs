@@ -138,76 +138,24 @@ namespace BeSafeWebApp.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            return View(new BeSafeWebApp.Models.LoginUser());
+            var ViewItems = new BeSafeWebApp.Models.TreeNode();
+            ViewItems.children = new List<BeSafeEntities.MasterItemsSet>();
+            ViewItems.Categories = new List<BeSafeEntities.Category>();
+            ViewItems.Categories = categoryBusinessLogic.GetAllCategories().Result.Where(c => c.ParentCategoryId == null)
+                .ToList();
+
+            return View(ViewItems);
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: UserController/Create
-        public ActionResult Create()
+        public ActionResult Navigate(int idcategory)
         {
-            return View();
-        }
-
-        // POST: UserController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var ViewItems = new BeSafeWebApp.Models.TreeNode();
+            ViewItems.children = new List<BeSafeEntities.MasterItemsSet>();
+            ViewItems.Categories = new List<BeSafeEntities.Category>();
+            ViewItems.Categories = categoryBusinessLogic.GetCategories(idcategory).Result.ToList();
+           ViewItems.children.AddRange(masterItemBusinessLogic.GetAllMasterItems().Result.Where(c => c.CategoryId == idcategory).ToList());
+            return View("index",ViewItems);
         }
     }
 }

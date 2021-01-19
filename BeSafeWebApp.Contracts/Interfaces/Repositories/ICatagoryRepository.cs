@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BeSafeWebApp.Contracts.Entities;
 
 namespace BeSafeWebApp.Contracts.Interfaces
 {
@@ -12,5 +13,6 @@ namespace BeSafeWebApp.Contracts.Interfaces
         //Task<int> AddUser(Entities.User inputEt);
         //Task UpdateUser(Entities.User inputEt);
         //Task DeleteUser(int id);
+        Task<IList<Entities.Category>> GetCategories(long id);
     }
 }

@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeSafeWebApp.Contracts.Models;
 
 namespace BeSafeWebApp.Models
 {
     public class TreeNode
-    {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-
-        public TreeNode ParentCategory { get; set; }
-        public List<TreeNode> Children { get; set; }
+    { 
+        public  List<Contracts.Entities.MasterItemsSet> children { get; set; }
+        public List<Contracts.Entities.Category> Categories { get; set; }
     }
 }

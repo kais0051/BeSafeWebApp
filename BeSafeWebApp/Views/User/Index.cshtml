@@ -1,4 +1,4 @@
-﻿@model BeSafeWebApp.Models.LoginUser
+﻿@model BeSafeWebApp.Models.TreeNode
 @{
     Layout = null;
 }
@@ -31,130 +31,62 @@
                         <em class="fa fa-home"></em>
                     </a>
                 </li>
-                <li class="active">Panels</li>
+                <li class="active">Dossiers</li>
             </ol>
         </div><!--/.row-->
 
-
-
-
-
-
-
-        <div class="row">
+        <div class="row" align="center">
             <div class="col-lg-12">
-                <h2>Collapsible Panels</h2>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Default Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Primary Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        Success Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.row -->
+                <a  href="@Url.Action("Index","User")">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        Info Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
+                <h2>Dossier principal</h2>
+                </a>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        Warning Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        Danger Panel
-                        <span class="pull-right clickable panel-toggle"><em class="fa fa-toggle-up"></em></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.row -->
+            @foreach (var item in Model.Categories)
+            {
+                <a class="blockLink" href="@Url.Action("Navigate","User",new {idcategory=item.CategoryId})">
 
-
-        <div class="col-lg-12">
-            <h2>Color Panels</h2>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-teal">
-                <div class="panel-heading dark-overlay">Teal Panel</div>
-                <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
+                <div class="col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Html.DisplayFor(modelItem => item.CategoryName)
+                        </div>
+                        <div class="panel-body">
+                            <p> @Html.DisplayFor(modelItem => item.Remarks)</p>
+                        </div>
+                    </div>
                 </div>
+                    </a>
+            }
+        </div>       
+    
+    
+        @if (Model.children.Any())
+        {
+            <div class="col-lg-12">
+                <h2>Contenu de dossier</h2>
             </div>
-        </div><!--/.col-->
 
-        <div class="col-md-6">
-            <div class="panel panel-blue">
-                <div class="panel-heading dark-overlay">Blue Panel</div>
-                <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                </div>
-            </div>
-        </div><!--/.col-->
+            foreach (var item in Model.children)
+            {
+                <div class="col-md-3">
+                    <div class="panel panel-orange">
+                        <div class="panel-heading dark-overlay">@Html.DisplayFor(modelItem => item.Name)</div>
+                        <div class="panel-body">
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                            @if (item.ItemType.ToLower() == "image")
+                            {
+                                <img src="@Html.DisplayFor(modelItem => item.ItemLink)" alt="your image" />
+                            }
+                        </div>
+                    </div>
+                </div> 
+            }
 
-        <div class="col-md-6">
-            <div class="panel panel-orange">
-                <div class="panel-heading dark-overlay">Orange Panel</div>
-                <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                </div>
-            </div>
-        </div><!--/.col-->
+        }
 
-        <div class="col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading dark-overlay">Red Panel</div>
-                <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-                </div>
-            </div>
-        </div><!--/.col-->
+       
+        
         <div class="col-sm-12">
             <p class="back-link">BeSafe by <a href="https://www.microacess.com">Micro Acess</a></p>
         </div>

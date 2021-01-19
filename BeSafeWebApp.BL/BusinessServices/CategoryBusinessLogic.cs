@@ -46,5 +46,12 @@ namespace BeSafeWebApp.BLL
         {
             await this._categoryRepository.DeleteAsync(category, true);
         }
+
+        public async Task<IList<Entities.Category>> GetCategories(int idcategory)
+        {
+            return await this._categoryRepository.GetCategories(idcategory);
+        }
+
+        
     }
 }
