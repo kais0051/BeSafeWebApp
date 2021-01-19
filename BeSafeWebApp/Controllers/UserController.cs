@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BeSafeWebApp.Contracts.Interfaces;
@@ -154,7 +155,14 @@ namespace BeSafeWebApp.Controllers
             ViewItems.children = new List<BeSafeEntities.MasterItemsSet>();
             ViewItems.Categories = new List<BeSafeEntities.Category>();
             ViewItems.Categories = categoryBusinessLogic.GetCategories(idcategory).Result.ToList();
-           ViewItems.children.AddRange(masterItemBusinessLogic.GetAllMasterItems().Result.Where(c => c.CategoryId == idcategory).ToList());
+            var listitems= masterItemBusinessLogic.GetAllMasterItems().Result.Where(c => c.CategoryId == idcategory)
+                .ToList();
+            foreach (var masterItemsSet in listitems)
+            {
+                if(masterItemsSet.ItemType.ToLower() != "lien")
+                    masterItemsSet.ItemLink = Path.Combine("\\UploadedMasterItem", masterItemsSet.ItemLink);
+            }
+           ViewItems.children.AddRange(listitems);
             return View("index",ViewItems);
         }
     }

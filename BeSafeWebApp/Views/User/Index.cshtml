@@ -33,7 +33,7 @@
                 </li>
                 <li class="active">Dossiers</li>
             </ol>
-        </div><!--/.row-->
+        </div>
 
         <div class="row" align="center">
             <div class="col-lg-12">
@@ -63,35 +63,55 @@
     
         @if (Model.children.Any())
         {
-            <div class="col-lg-12">
-                <h2>Contenu de dossier</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Contenu de dossier</h2>
+        </div>
+    </div>
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model.children)
+                    {
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                <p class="card-text" align="center">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </p>
+                                </div>
+                                <div class="row">
+                                @if (item.ItemType.ToLower() == "image")
+                                {
+                                    <img width="100%" height="1000px" src="@Html.DisplayFor(modelItem => item.ItemLink)" alt="your image"/>
+                                }
+                                @if (item.ItemType.ToLower() == "document" || (item.ItemType.ToLower() == "autre"))
+                                {
+                                    <iframe width="100%"
+                                            height="1000px"
+                                            src="@Html.DisplayFor(modelItem => item.ItemLink)"></iframe>
+                                }
+                                @if (item.ItemType.ToLower() == "lien")
+                                {
+                                    <a target="_blank" href="@Html.DisplayFor(modelItem => item.ItemLink)"> Lien </a>
+                                }
+                            </div>
+                            </div>
+                            </div>
+ 
+                    }
+                </div>
             </div>
-
-            foreach (var item in Model.children)
-            {
-                <div class="col-md-3">
-                    <div class="panel panel-orange">
-                        <div class="panel-heading dark-overlay">@Html.DisplayFor(modelItem => item.Name)</div>
-                        <div class="panel-body">
-                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                            @if (item.ItemType.ToLower() == "image")
-                            {
-                                <img src="@Html.DisplayFor(modelItem => item.ItemLink)" alt="your image" />
-                            }
-                        </div>
-                    </div>
-                </div> 
-            }
-
         }
-
-       
-        
-        <div class="col-sm-12">
+ </div>
+<div class="col-sm-12">
             <p class="back-link">BeSafe by <a href="https://www.microacess.com">Micro Acess</a></p>
         </div>
-    </div><!--/.row-->
-  
+    
+      
 
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
