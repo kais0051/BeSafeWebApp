@@ -48,16 +48,16 @@
                                 <input asp-for="Password" class="form-control" type="password" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
-                                </label>
-                            </div>
+                           
                             <input type="submit" value="Login" class="btn btn-primary" />
                             @*@Html.ActionLink("Login", "Login", "Home", new { login = Model.login, password = Model.password }, new { @class = "btn btn-primary" })*@
 
                             @Html.ActionLink("Utilisateur invité", "Index", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
-
+                            <div style="margin-top: 50px">
+                                <label>
+                                    En se connectant j'accepte les <a target="_blank" href='@Url.ActionLink("Index", "Condition", null)'>conditions générales</a>
+                                </label>
+                            </div>
                         </fieldset>
                     </form>
                 </div>

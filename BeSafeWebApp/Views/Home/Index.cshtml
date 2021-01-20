@@ -48,7 +48,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                En se connectant j'accepte les <a href="@Html.ActionLink("Utilisateur invité", "Index", "Condition", null)">conditions générales</a>
                             </label>
                         </div>
                     @Html.ActionLink("Login", "Login", "Home", new {login = Model.login, password = Model.password}, new {@class = "btn btn-primary"})
