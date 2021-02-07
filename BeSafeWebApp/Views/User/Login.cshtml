@@ -52,7 +52,7 @@
                             <input type="submit" value="Login" class="btn btn-primary" />
                             @*@Html.ActionLink("Login", "Login", "Home", new { login = Model.login, password = Model.password }, new { @class = "btn btn-primary" })*@
 
-                            @Html.ActionLink("Utilisateur invité", "Index", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
+                            @Html.ActionLink("Utilisateur invité",  "Index", "User", null, new { @class = "btn btn-warning", @style = "float: right;" })
                             <div style="margin-top: 50px">
                                 <label>
                                     En se connectant j'accepte les <a target="_blank" href='@Url.ActionLink("Index", "Condition", null)'>conditions générales</a>
