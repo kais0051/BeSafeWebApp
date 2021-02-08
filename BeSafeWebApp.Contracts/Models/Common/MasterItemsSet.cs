@@ -42,7 +42,7 @@ namespace BeSafeWebApp.Contracts.Models
     }
     public class BufferedSingleFileUploadDb
     {
-        [Required]
+        // we delete this -->  [Required]
         [Display(Name = "Uploader File")]
         public IFormFile FormFile { set; get; }
     }

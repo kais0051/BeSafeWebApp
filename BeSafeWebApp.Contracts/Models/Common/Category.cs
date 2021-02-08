@@ -14,11 +14,11 @@ namespace BeSafeWebApp.Contracts.Models
            // Children = new List<Category>();
         }
         public long CategoryId { get; set; }
-        [StringLength(13)]
+        // we delete this -->  [StringLength(13)]
         public string CategoryName { get; set; }
         public long? ParentCategoryId { get; set; }
 
-        [StringLength(30)]
+        // we delete this -->  [StringLength(30)]
         public string Remarks { get; set; }
         public Category Parent { get; set; }
 
