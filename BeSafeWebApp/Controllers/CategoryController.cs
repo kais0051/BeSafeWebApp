@@ -183,6 +183,7 @@ namespace BeSafeWebApp.Controllers
                 {
                     BeSafeModels.MasterItemsSet masterItem = new BeSafeModels.MasterItemsSet();
                     masterItem.CategoryId = categoryId;
+                    masterItem.CreatedDate = DateTime.Today;
                     return View(masterItem);
                 }
                 else
@@ -207,7 +208,7 @@ namespace BeSafeWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
+        public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CreatedDate,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
         {
             if (ModelState.IsValid)
             {
@@ -224,8 +225,8 @@ namespace BeSafeWebApp.Controllers
                             masterItemsSet.UploadFile.CopyTo(new FileStream(filePath, FileMode.Create));
                             masterItem.ItemLink = uniqueFileName;
                         }
-                        masterItem.CreatedDate = DateTime.Now;
-                        //masterItem.CreatedDate = masterItemsSet.CreatedDate; he dont accept this
+                        //masterItem.CreatedDate = DateTime.Now;
+                        masterItem.CreatedDate = masterItemsSet.CreatedDate; //he dont accept this
 
                         await masterItemBusinessLogic.AddMasterItem(masterItem);
                     }

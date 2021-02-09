@@ -79,26 +79,32 @@
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                <p class="card-text" align="center">
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </p>
+                                    <p class="card-text" align="center">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </p>
+                                </div>
+                                <div class="alert alert-warning" align="center">
+                                    <strong  align="center">Warning!</strong> 
+                                        Rappel le :
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    
                                 </div>
                                 <div class="row">
-                                @if (item.ItemType.ToLower() == "image")
-                                {
-                                    <img width="100%" height="1000px" src="@Html.DisplayFor(modelItem => item.ItemLink)" alt="your image"/>
-                                }
-                                @if (item.ItemType.ToLower() == "document" || (item.ItemType.ToLower() == "autre"))
-                                {
-                                    <iframe width="100%"
-                                            height="1000px"
-                                            src="@Html.DisplayFor(modelItem => item.ItemLink)"></iframe>
-                                }
-                                @if (item.ItemType.ToLower() == "lien")
-                                {
-                                    <a target="_blank" href="@Html.DisplayFor(modelItem => item.ItemLink)"> Lien </a>
-                                }
-                            </div>
+                                    @if (item.ItemType.ToLower() == "image")
+                                    {
+                                        <img width="100%" height="1000px" src="@Html.DisplayFor(modelItem => item.ItemLink)" alt="your image" />
+                                    }
+                                    @if (item.ItemType.ToLower() == "document" || (item.ItemType.ToLower() == "autre"))
+                                    {
+                                        <iframe width="100%"
+                                                height="1000px"
+                                                src="@Html.DisplayFor(modelItem => item.ItemLink)"></iframe>
+                                    }
+                                    @if (item.ItemType.ToLower() == "lien")
+                                    {
+                                        <a target="_blank" href="@Html.DisplayFor(modelItem => item.ItemLink)"> Lien </a>
+                                    }
+                                </div>
                             </div>
                             </div>
  
