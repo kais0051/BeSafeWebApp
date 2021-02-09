@@ -225,6 +225,8 @@ namespace BeSafeWebApp.Controllers
                             masterItem.ItemLink = uniqueFileName;
                         }
                         masterItem.CreatedDate = DateTime.Now;
+                        //masterItem.CreatedDate = masterItemsSet.CreatedDate; he dont accept this
+
                         await masterItemBusinessLogic.AddMasterItem(masterItem);
                     }
                     else

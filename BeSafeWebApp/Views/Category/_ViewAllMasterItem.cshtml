@@ -3,21 +3,23 @@
 <div class="col-md-12 form-group">
     @foreach (var masterItem in Model)
     {
-        <div class="form-group">
-            @if (masterItem.ItemType.ToUpper() == "LIEN" || masterItem.ItemType.ToUpper() == "AUTRE")
-            {
-                <a href="@masterItem.ItemLink" class="btn btn-md btn-link" target="_blank">@masterItem.Name</a>
-            }
-            else
-            {
-        <a asp-controller="Category"
-           asp-action="Download"
-           asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
-            }
-            <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
-                <span class="glyphicon glyphicon-remove"></span>
-            </a>
-        </div>}
+    <div class="form-group">
+        @if (masterItem.ItemType.ToUpper() == "LIEN" || masterItem.ItemType.ToUpper() == "AUTRE")
+        {
+            <a href="@masterItem.ItemLink" class="btn btn-md btn-link" target="_blank">@masterItem.Name</a>
+        }
+        else
+        {
+            <a asp-controller="Category"
+               asp-action="Download"
+               asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
+        }
+    <label asp-for=" @masterItem.CreatedDate">Rappel le : @masterItem.CreatedDate</label>
+
+        <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+    </div>}
 </div>
 
 
