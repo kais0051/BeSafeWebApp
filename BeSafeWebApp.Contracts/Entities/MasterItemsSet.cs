@@ -18,6 +18,7 @@ namespace BeSafeWebApp.Contracts.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public string ItemLink { get; set; }
+
         public DateTime CreatedDate { get; set; }
         public Category Category { get; set; }
     }

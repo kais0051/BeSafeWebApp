@@ -85,6 +85,7 @@ namespace BeSafeWebApp.Controllers
                     var masterItemEntity = await masterItemBusinessLogic.GetMasterItemById(itemId);
                     var masterItemModel = mapMasterItemEntityToModel.ConvertObject(masterItemEntity);
                     masterItemEntity.CreatedDate = DateTime.Today;
+                    
                     if (masterItemModel == null)
                     {
                         return NotFound();

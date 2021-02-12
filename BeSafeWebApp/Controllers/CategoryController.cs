@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using System.Globalization;
 
 namespace BeSafeWebApp.Controllers
 {
@@ -227,7 +228,7 @@ namespace BeSafeWebApp.Controllers
                         }
                         //masterItem.CreatedDate = DateTime.Now;
                         masterItem.CreatedDate = masterItemsSet.CreatedDate; //he dont accept this
-
+                        masterItem.CreatedDate.ToString(string.Format("{0:dd/MM/yyyy}"));
                         await masterItemBusinessLogic.AddMasterItem(masterItem);
                     }
                     else

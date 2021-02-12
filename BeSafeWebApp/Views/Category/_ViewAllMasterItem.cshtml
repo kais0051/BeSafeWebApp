@@ -14,11 +14,12 @@
                asp-action="Download"
                asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
         }
-    <label asp-for=" @masterItem.CreatedDate">Rappel le : @masterItem.CreatedDate</label>
+    <label asp-for=" @masterItem.CreatedDate"  data-date-format="dd-mm-yyyy hh:ii">Rappel le : @masterItem.CreatedDate</label>
 
         <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
+        
     </div>}
 </div>
 
