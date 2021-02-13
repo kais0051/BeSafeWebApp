@@ -211,7 +211,7 @@ namespace BeSafeWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CreatedDate,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
         {
-            if (ModelState.IsValid)
+            if (masterItemsSet.Name!=null)
             {
                 try
                 {
@@ -228,7 +228,7 @@ namespace BeSafeWebApp.Controllers
                         }
                         //masterItem.CreatedDate = DateTime.Now;
                         masterItem.CreatedDate = masterItemsSet.CreatedDate; //he dont accept this
-                        masterItem.CreatedDate.ToString(string.Format("{0:dd/MM/yyyy}"));
+                     //   masterItem.CreatedDate.ToString(string.Format("{0:dd/MM/yyyy}"));
                         await masterItemBusinessLogic.AddMasterItem(masterItem);
                     }
                     else
