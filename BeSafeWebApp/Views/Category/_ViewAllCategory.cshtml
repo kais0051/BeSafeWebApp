@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<BeSafeWebApp.Contracts.Models.Category>
-
+ 
 
 @foreach (var category in Model)
 {
-<div class="col-sm-12" style="margin-bottom: 0;">
-    <div class="panel panel-default" id="@("CategoryPanel"+category.CategoryId)">
-        @await Html.PartialAsync("_Category", category)
+    <div class="col-sm-12" style="margin-bottom: 0;">
+        <div class="panel panel-default" id="@("CategoryPanel"+category.CategoryId)">
+          
+            @await Html.PartialAsync("_Category", category)
 
-        @await Html.PartialAsync("_ViewAllCategory", category.Children)
+            @await Html.PartialAsync("_ViewAllCategory", category.Children)
 
-    </div>
-</div>}
+        </div>
+    </div>}
 

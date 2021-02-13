@@ -1,27 +1,47 @@
 ﻿@model IEnumerable<BeSafeWebApp.Contracts.Models.MasterItemsSet>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<div class="col-md-12 form-group">
-    @foreach (var masterItem in Model)
-    {
-    <div class="form-group">
-        @if (masterItem.ItemType.ToUpper() == "LIEN" || masterItem.ItemType.ToUpper() == "AUTRE")
+
+    <style>
+        .box { color: #fff;padding: 20px;display: none;margin-top: 20px;}
+        .red {background: #ff0000;}.green { background: #228B22;}
+          .blue {background: #0000ff;}  label { margin-right: 15px;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[type="checkbox"]').click(function () {
+                var inputValue = $(this).attr("value");
+                $("." + inputValue).toggle();
+            });
+        });
+    </script>
+
+    <div class="col-md-12 form-group">
+        @foreach (var masterItem in Model)
         {
-            <a href="@masterItem.ItemLink" class="btn btn-md btn-link" target="_blank">@masterItem.Name</a>
-        }
-        else
-        {
-            <a asp-controller="Category"
-               asp-action="Download"
-               asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
-        }
+        <div class="form-group">
+            @if (masterItem.ItemType.ToUpper() == "LIEN" || masterItem.ItemType.ToUpper() == "AUTRE")
+            {
+                <a href="@masterItem.ItemLink" class="btn btn-md btn-link" target="_blank">@masterItem.Name</a>
+            }
+            else
+            {
+                <a asp-controller="Category"
+                   asp-action="Download"
+                   asp-route-id="@masterItem.ItemId">Cliquez ici pour télécharger : @masterItem.Name</a>
+            }
+            <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+          
+            <div class="blue box">
 
-    <label asp-for=" @masterItem.CreatedDate"  data-date-format="dd-mm-yyyy hh:ii">Rappel le : @masterItem.CreatedDate</label>
+                <label asp-for=" @masterItem.CreatedDate" name="blue box" data-date-format="dd-mm-yyyy hh:ii">Rappel le : @masterItem.CreatedDate</label>
+            </div>
 
-        <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
-            <span class="glyphicon glyphicon-remove"></span>
-        </a>
-        
-    </div>}
-</div>
+
+        </div>}
+    </div>
 
 
