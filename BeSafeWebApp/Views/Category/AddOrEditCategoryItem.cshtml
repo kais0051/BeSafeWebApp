@@ -1,7 +1,13 @@
 ﻿@model BeSafeWebApp.Contracts.Models.MasterItemsSet
 
 @{ Layout = null; }
-
+<script>
+    $(document).ready(function () {
+        $('#b').click(function () {
+             $('#b1').toggle();
+        });
+    });
+</script>
 <div class="row">
     <div class="col-md-12">
         <form asp-action="AddOrEditCategoryItem" asp-controller="Category" asp-route-id="@Model.ItemId" onsubmit="return jQueryAjaxPostForCategoryItem(this);" enctype="multipart/form-data">
@@ -18,38 +24,41 @@
                 <input asp-for="Description" class="form-control" type="text" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate">Reminder  :</label>
-                <input asp-for="CreatedDate" data-date-format="dd-mm-yyyy hh:ii"/>
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
+
 
             <div class="form-group">
-                <label asp-for="ItemType">Type</label>
-                <select class="form-control"
-                        asp-for="ItemType"
-                        asp-items="@(new SelectList(Model.ItemTypeList, "Name","Type"))">
-                    <option value="">- Sélectionner -</option>
-                </select>
+                <label asp-for="CreatedDate">Rappel le  :</label>
+                <input  type="checkbox" id="b">
+                <input asp-for="CreatedDate" id="b1" data-date-format="dd-mm-yyyy hh:ii" />
+                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                </div>
 
-                <span asp-validation-for="ItemType" class="text-danger"></span>
-            </div>
-            <div class="form-group" id="divitemlink" style="display:none">
-                <label asp-for="ItemLink">Lien</label>
-                <input asp-for="ItemLink" class="form-control" />
+                <div class="form-group">
+                    <label asp-for="ItemType">Type</label>
+                    <select class="form-control"
+                            asp-for="ItemType"
+                            asp-items="@(new SelectList(Model.ItemTypeList, "Name","Type"))">
+                        <option value="">- Sélectionner -</option>
+                    </select>
 
-                <span asp-validation-for="ItemLink" class="text-danger"></span>
-            </div>
-            <div class="form-group" id="divuploaditem" style="display:none">
-                <label asp-for="UploadFile" class="control-label">Télécharger un fichier</label>
-                <input asp-for="UploadFile" class="form-control-file" />
-                <span asp-validation-for="UploadFile"></span>
-            </div>
+                    <span asp-validation-for="ItemType" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="divitemlink" style="display:none">
+                    <label asp-for="ItemLink">Lien</label>
+                    <input asp-for="ItemLink" class="form-control" />
 
-            <div class="form-group">
-                <input type="submit" value="Ajouter" class="btn btn-primary btn-block" />
-            </div>
-        </form>
+                    <span asp-validation-for="ItemLink" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="divuploaditem" style="display:none">
+                    <label asp-for="UploadFile" class="control-label">Télécharger un fichier</label>
+                    <input asp-for="UploadFile" class="form-control-file" />
+                    <span asp-validation-for="UploadFile"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Ajouter" class="btn btn-primary btn-block" />
+                </div>
+</form>
     </div>
 </div>
 
