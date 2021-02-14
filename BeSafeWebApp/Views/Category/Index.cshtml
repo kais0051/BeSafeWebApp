@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <div class="row">
     <ol class="breadcrumb">
         <li>
@@ -30,7 +32,7 @@
                     <div class="panel-header with-border">
                         <h2 class="panel-title text-center" style="margin-top: 10px">DÉFINIR L'ARBORESCENCE</h2>
                     </div>
-                      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
                         @await Html.PartialAsync("_ViewAllCategory", Model.categories)
                     </div>

@@ -3,8 +3,8 @@
 @{ Layout = null; }
 <script>
     $(document).ready(function () {
-        $('.b').click(function () {
-             $('.b1').toggle();
+        $('#b').click(function () {
+            $('#b1').toggle();
         });
     });
 </script>
@@ -23,39 +23,39 @@
                 <label asp-for="Description">Description</label>
                 <input asp-for="Description" class="form-control" type="text" />
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div> 
+            </div>
             <div class="form-group">
                 <label asp-for="CreatedDate">Rappel le  :</label>
-                <input  type="checkbox"     class="b" >
-                <input asp-for="CreatedDate" class="b1" hidden  data-date-format="dd-mm-yyyy hh:ii" />
-                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
-             </div> 
-                <div class="form-group">
-                    <label asp-for="ItemType">Type</label>
-                    <select class="form-control"
-                            asp-for="ItemType"
-                            asp-items="@(new SelectList(Model.ItemTypeList, "Name","Type"))">
-                        <option value="">- Sélectionner -</option>
-                    </select>
+                <input type="checkbox" id="b">
+                <input asp-for="CreatedDate" id="b1" hidden data-date-format="dd-mm-yyyy hh:ii" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemType">Type</label>
+                <select class="form-control"
+                        asp-for="ItemType"
+                        asp-items="@(new SelectList(Model.ItemTypeList, "Name","Type"))">
+                    <option value="">- Sélectionner -</option>
+                </select>
 
-                    <span asp-validation-for="ItemType" class="text-danger"></span>
-                </div>
-                <div class="form-group" id="divitemlink" style="display:none">
-                    <label asp-for="ItemLink">Lien</label>
-                    <input asp-for="ItemLink" class="form-control" />
+                <span asp-validation-for="ItemType" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="divitemlink" style="display:none">
+                <label asp-for="ItemLink">Lien</label>
+                <input asp-for="ItemLink" class="form-control" />
 
-                    <span asp-validation-for="ItemLink" class="text-danger"></span>
-                </div>
-                <div class="form-group" id="divuploaditem" style="display:none">
-                    <label asp-for="UploadFile" class="control-label">Télécharger un fichier</label>
-                    <input asp-for="UploadFile" class="form-control-file" />
-                    <span asp-validation-for="UploadFile"></span>
-                </div>
+                <span asp-validation-for="ItemLink" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="divuploaditem" style="display:none">
+                <label asp-for="UploadFile" class="control-label">Télécharger un fichier</label>
+                <input asp-for="UploadFile" class="form-control-file" />
+                <span asp-validation-for="UploadFile"></span>
+            </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Ajouter" class="btn btn-primary btn-block" />
-                </div>
-</form>
+            <div class="form-group">
+                <input type="submit" value="Ajouter" class="btn btn-primary btn-block" />
+            </div>
+        </form>
     </div>
 </div>
 
