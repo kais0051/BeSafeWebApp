@@ -211,7 +211,7 @@ namespace BeSafeWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEditCategoryItem(long ItemId, [Bind("ItemId,CreatedDate,CategoryId,ItemType,Name,Description,ItemLink,UploadFile")] BeSafeModels.MasterItemsSet masterItemsSet)
         {
-            if (masterItemsSet.Name!=null)
+            if (ModelState.IsValid)
             {
                 try
                 {
