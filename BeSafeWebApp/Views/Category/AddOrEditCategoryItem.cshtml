@@ -3,8 +3,8 @@
 @{ Layout = null; }
 <script>
     $(document).ready(function () {
-        $('#b').click(function () {
-             $('#b1').toggle();
+        $('.b').click(function () {
+             $('.b1').toggle();
         });
     });
 </script>
@@ -26,8 +26,8 @@
             </div> 
             <div class="form-group">
                 <label asp-for="CreatedDate">Rappel le  :</label>
-                <input  type="checkbox"     id="b" >
-                <input asp-for="CreatedDate" id="b1" hidden  data-date-format="dd-mm-yyyy hh:ii" />
+                <input  type="checkbox"     class="b" >
+                <input asp-for="CreatedDate" class="b1" hidden  data-date-format="dd-mm-yyyy hh:ii" />
                     <span asp-validation-for="CreatedDate" class="text-danger"></span>
              </div> 
                 <div class="form-group">
