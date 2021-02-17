@@ -18,8 +18,10 @@
         <a href="#" class="exit-btn pull-left" onclick="DeleteCategoryItem('@Url.Action("DeleteCategoryItem","Category",null,Context.Request.Scheme)','@masterItem.ItemId','@masterItem.CategoryId')">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
-        <label asp-for="@masterItem.CreatedDate">Rappel le  :@masterItem.CreatedDate </label>
-
+        @if (masterItem.CreatedDate.ToShortDateString() != "01/01/2021")
+        {
+    <label asp-for="@masterItem.CreatedDate">Rappel le :@masterItem.CreatedDate.ToString("dddd, dd MMMM yyyy HH:mm") </label>
+        }
 
     </div>}
 </div>

@@ -184,7 +184,7 @@ namespace BeSafeWebApp.Controllers
                 {
                     BeSafeModels.MasterItemsSet masterItem = new BeSafeModels.MasterItemsSet();
                     masterItem.CategoryId = categoryId;
-                    masterItem.CreatedDate = DateTime.Today;
+                    masterItem.CreatedDate = new DateTime(2021,01,01);
                     return View(masterItem);
                 }
                 else

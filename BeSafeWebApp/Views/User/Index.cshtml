@@ -83,12 +83,16 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </p>
                                 </div>
-                                <div class="alert alert-warning" align="center">
-                                    <strong  align="center">Warning!</strong> 
+                                @if (item.CreatedDate.ToShortDateString() != "01/01/2021")
+                                {
+                                    <div class="alert alert-danger" align="center">
+                                        <strong align="center">Warning!</strong>
                                         Rappel le :
-                                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                                    
-                                </div>
+                                        @Html.DisplayFor(modelItem => item.CreatedDate.ToString("dddd, dd MMMM yyyy HH:mm"))
+
+                                    </div>
+                                }
+                               
                                 <div class="row">
                                     @if (item.ItemType.ToLower() == "image")
                                     {
